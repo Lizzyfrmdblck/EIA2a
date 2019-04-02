@@ -1,8 +1,8 @@
 /*
-Aufgabe 00 Arbeitsfähigkeit herstellen
-Name: Elyssia-Sofie Dürr
+Aufgabe 00 Arbeitsfï¿½higkeit herstellen
+Name: Elyssia-Sofie Dï¿½rr
 Matrikel: 
-Datum: 07.10.18
+Datum: 31.03.2019
     
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
 Er wurde nicht kopiert und auch nicht diktiert.
@@ -11,14 +11,14 @@ Er wurde nicht kopiert und auch nicht diktiert.
 function Hallo(): void {
     var name: string;
     name = prompt("Nanu, Wie heisst du denn?");
-    var greet: string = "Viel Spaß bei EIA2,";
+    var greet: string = "Viel Spaï¿½ bei EIA2,";
  var div: HTMLElement = document.getElementById("Greet");
     div.innerHTML = greet + " " + name;
     
  
 
     // Konsole:
-    console.log("Viel Spaß bei EIA2, " + prompt + "!");
+    console.log("Viel Spaï¿½ bei EIA2, " + prompt + "!");
 }
 document.addEventListener('DOMContentLoaded', Hallo);
 //# sourceMappingURL=Aufgabe0.js.map
