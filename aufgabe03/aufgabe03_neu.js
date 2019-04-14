@@ -60,7 +60,7 @@ var Aufgabe02;
     function listeners() {
         console.log("listener");
         document.getElementById("aufnehmen").addEventListener("click", drawCard);
-        document.addEventListener("keydown", drawCard);
+        document.addEventListener("32", drawCard);
         document.getElementById("sort").addEventListener("click", sortcards);
     }
     //soll abgelegte Karte in Div anzeigen

@@ -119,7 +119,7 @@ namespace Aufgabe02 {
         displayHand();
     }
 
-   //Sorteirt die Handkarten
+   //Sortiert die Handkarten
    
     function compare(a: Card, b: Card): number {
          if (a.cardSymbol > b.cardSymbol) {
