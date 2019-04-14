@@ -123,15 +123,27 @@ namespace Aufgabe02 {
    
     function compare(a: Card, b: Card): number {
          if (a.cardSymbol > b.cardSymbol) {
+             //vergleicht karte a mit karte b und wenn das symbol von a 
+             //im array weiter hinten steht als das symbol von karte b, 
+             //wird der rückgabewert = 1, d.h. die größere karte kommt rechts von der kleineren
                 return 1;
             }
             if (a.cardSymbol < b.cardSymbol) {
+            //vergleicht karte a mit karte b und wenn das symbol von a 
+             //im array weiter vorne steht als das symbol von karte b, 
+             //wird der rückgabewert = -1, d.h. die kleinere karte kommt links von der größeren
                 return -1;
             }
             if (a.cardValue > b.cardValue) {
+             //vergleicht karte a mit karte b und wenn der wert von a 
+             //im array weiter hinten steht als der wert von karte b, 
+             //wird der rückgabewert = 1, d.h. die höhere karte kommt rechts von der niedrigeren
                 return 1;
             }
             if (a.cardValue < b.cardValue) {
+             //vergleicht karte a mit karte b und wenn das symbol von a 
+             //im array weiter vorne steht als das symbol von karte b, 
+             //wird der rückgabewert = -1, d.h. die niedrigere karte kommt links von der höheren
                 return -1;
             }
             return 0;

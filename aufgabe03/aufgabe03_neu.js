@@ -60,7 +60,7 @@ var Aufgabe02;
     function listeners() {
         console.log("listener");
         document.getElementById("aufnehmen").addEventListener("click", drawCard);
-        document.addEventListener("32", drawCard);
+        document.addEventListener("keydown", drawCard);
         document.getElementById("sort").addEventListener("click", sortcards);
     }
     //soll abgelegte Karte in Div anzeigen
@@ -101,18 +101,30 @@ var Aufgabe02;
         handcards.splice(index, 1);
         displayHand();
     }
-    //Sorteirt die Handkarten
+    //Sortiert die Handkarten
     function compare(a, b) {
         if (a.cardSymbol > b.cardSymbol) {
+            //vergleicht karte a mit karte b und wenn das symbol von a 
+            //im array weiter hinten steht als das symbol von karte b, 
+            //wird der rückgabewert = 1, d.h. die größere karte kommt rechts von der kleineren
             return 1;
         }
         if (a.cardSymbol < b.cardSymbol) {
+            //vergleicht karte a mit karte b und wenn das symbol von a 
+            //im array weiter vorne steht als das symbol von karte b, 
+            //wird der rückgabewert = -1, d.h. die kleinere karte kommt links von der größeren
             return -1;
         }
         if (a.cardValue > b.cardValue) {
+            //vergleicht karte a mit karte b und wenn der wert von a 
+            //im array weiter hinten steht als der wert von karte b, 
+            //wird der rückgabewert = 1, d.h. die höhere karte kommt rechts von der niedrigeren
             return 1;
         }
         if (a.cardValue < b.cardValue) {
+            //vergleicht karte a mit karte b und wenn das symbol von a 
+            //im array weiter vorne steht als das symbol von karte b, 
+            //wird der rückgabewert = -1, d.h. die niedrigere karte kommt links von der höheren
             return -1;
         }
         return 0;
