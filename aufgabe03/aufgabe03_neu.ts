@@ -19,6 +19,7 @@ namespace Aufgabe02 {
 
     let value: string[] = ["7", "8", "9", "10", "bube", "dame", "könig", "ass"];
     let symbol: string[] = ["♣", "♠", "♥", "♦"];
+    let discard: Card[] = [];
     let deck: Card[] = [];
     let handcards: Card[] = [];
     let place: Card[] = [];
@@ -34,13 +35,15 @@ namespace Aufgabe02 {
             }
         }
         //Nutzer gibt gewünschte Anzahl Karten in das Eingabefenster ein. Diese wird in ein 
-        //Array umgewandelt, damit gecheckt werden kann, ob sie kleiner als 10 ist.
+        //Array umgewandelt, damit gecheckt werden kann, ob sie zwischen 1 und 31 ist.
         let nmbOfCards: string;
         nmbOfCards = prompt("Mit wie vielen Karten willst Du spielen?");
 
         if (isNaN(parseInt(nmbOfCards)) || parseInt(nmbOfCards) > 31) {
+            //wenn Zahl größer als 31 erneute Aufforderung
             nmbOfCards = prompt("Gib eine Zahl zwischen 1 und 31 ein.");
         } else {
+            //wenn Zahl 31 oder kleiner, neue Anzeige und Zahl wird in String umgewandelt
             alert("Du spielst mit " + nmbOfCards + " Karten!");
             createHand(parseInt(nmbOfCards));
         }
@@ -48,21 +51,30 @@ namespace Aufgabe02 {
 
 //Karten mischeln 
     function createHand(_x: number): void {  
+        //Parameter x aus Eingabefenster wird übernommen 
         for (let k: number = _x; k > 0; k--) {
+            //x wird zu k
+            //neue Schleife wählt zufällige Karte aus Deck-Array aus pusht es in das handcards Array
+            //bis k 0 ist 
             let l: number;
             l = Math.floor(Math.random() * (deck.length - 1));
             handcards.push(deck[l]);
             deck.splice(l, 1);
         }
         displayHand();
+        //Handkarten werden angezeigt, siehe Funktin displayHand
     }
-
+//event listeners werden aktiviert und zugeordnet
+//wieso passiert das Legen bei jedem Tastendruck, nicht nur bei der Leertaste?
     function listeners(): void {
         console.log("listener");
-        document.getElementById("aufnehmen").addEventListener("click", drawCard); //drawCard und sort brauch ich noch
+        document.getElementById("aufnehmen").addEventListener("click", drawCard);
         document.addEventListener("keydown", drawCard);
         document.getElementById("sort").addEventListener("click", sortcards);
     }
+
+    //soll abgelegte Karte in Div anzeigen
+
 
     function displayHand(): void {
         document.getElementById("handCards").innerHTML = "";
@@ -81,6 +93,7 @@ namespace Aufgabe02 {
         console.log(handcards);
     } 
 
+
     function drawCard(): void {
         let l: number = Math.floor(Math.random() * (deck.length - 1));
         handcards.push(deck[l]);
@@ -92,13 +105,14 @@ namespace Aufgabe02 {
     function playCard(_event: MouseEvent): void {
         let clickedCard: HTMLElement = <HTMLElement>_event.target;
         let index: number = parseInt(clickedCard.id);
-        place.push(handcards[index]); //was hei�t das
+        place.push(handcards[index]); 
         console.log(index);
 
         document.getElementById("discard").innerHTML = "";
         let div: HTMLElement = document.createElement("div");
         document.getElementById("discard").appendChild(div);
         div.innerHTML = handcards[index].cardValue;
+        div.innerHTML = handcards[index].cardSymbol;
         div.classList.add(handcards[index].cardSymbol);
         div.classList.add("handCardStyle");
         handcards.splice(index, 1);
