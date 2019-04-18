@@ -38,34 +38,34 @@ body {
 	
 	
 #aufnehmen {
-	width: 50px;
-	height: 20px;
+	width: 100px;
+	height: 50px;
 	border: solid white 5px;
 	text-align: center;
-	text-position: middle;
 	border-radius: 10px;
-	padding-left: 15px;
-	color: #ffffff;
-	background-color: #969696;
+	color: #000;
+	background-color: #fff;
 	font-family: 'Quicksand', sans-serif;
-	font-size: 0.5em;
+	font-size: 1.1em;
+	padding-top: 30px;
+
 }
 
 
 #sort {
-	width: 50px;
-	height: 20px;
-	position: absolute;
+	width: 100px;
+	height: 50px;
+	/*position: absolute;*/
 	text-align: center;
-	text-position: middle;
-	padding-top: 15px;
 	border: solid white 5px;
 	border-radius: 10px;
-	color: white;
-	background-color: #535353;
+	color: #000;
+	background-color: #fff;
 	font-family: 'Quicksand', sans-serif;
-	font-size:0.5em;
-	display: block;
+	font-size:1.1em;
+	padding-top: 30px;
+	float: right;
+
 	
 }
 
@@ -78,7 +78,7 @@ body {
     font-family: 'Quicksand', sans-serif;
 	font-size: 2em;
 	margin-left: 30px;
-	top: 450px;
+	top: 0px;
 	bottom: 100px;
 	left: 50px;
 	padding: 20px;

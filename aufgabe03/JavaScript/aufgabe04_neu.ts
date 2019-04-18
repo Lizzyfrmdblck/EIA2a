@@ -155,7 +155,7 @@ namespace aufgabe03_verbessert {
     // Keyevent prüfen ob Leertaste______________________________________________________
     function checkKey(_event: KeyboardEvent): void {
         if (_event.keyCode == 32) {
-            console.log("space on fire");
+            console.log("leertaste klappt");
             drawCard();
         }
     }
