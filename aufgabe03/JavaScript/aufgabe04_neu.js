@@ -17,6 +17,13 @@ var aufgabe03_verbessert;
     let deck = [];
     let handcards = [];
     let place = [];
+    // EventListener installieren___________________________________________________
+    function listeners() {
+        console.log("install listener");
+        document.addEventListener("keydown", checkKey);
+        document.getElementById("aufnehmen").addEventListener("click", drawCard);
+        document.getElementById("sort").addEventListener("click", sortCards);
+    }
     // init__________________________________________________________________________
     function init() {
         listeners();
@@ -84,13 +91,6 @@ var aufgabe03_verbessert;
             alert("Du spielst mit " + nmbOfCards + " Karten!");
             createHand(parseInt(nmbOfCards));
         }
-    }
-    // EventListener installieren___________________________________________________
-    function listeners() {
-        console.log("install listener");
-        document.addEventListener("keydown", checkKey);
-        document.getElementById("aufnehmen").addEventListener("click", drawCard);
-        document.getElementById("sort").addEventListener("click", sortCards);
     }
     // Karten mischeln____________________________________________________________________ 
     function createHand(_x) {

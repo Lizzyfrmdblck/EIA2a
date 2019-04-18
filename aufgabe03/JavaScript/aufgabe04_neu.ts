@@ -26,10 +26,21 @@ namespace aufgabe03_verbessert {
     let handcards: Card[] = [];
     let place: Card[] = [];
 
+    // EventListener installieren___________________________________________________
+    function listeners(): void {
+        console.log("install listener");
+
+    document.addEventListener("keydown", checkKey);
+    document.getElementById("aufnehmen").addEventListener("click", drawCard);
+    document.getElementById("sort").addEventListener("click", sortCards);
+    }
+
     // init__________________________________________________________________________
     function init(): void {
         listeners();
+        
 
+    
         for (let i: number = 0; i < value.length; i++) {
             for (let j: number = 0; j < farbe.length; j++) {
                 let sortValue: string = "";
@@ -105,14 +116,7 @@ namespace aufgabe03_verbessert {
         }
     }
 
-    // EventListener installieren___________________________________________________
-    function listeners(): void {
-        console.log("install listener");
-
-        document.addEventListener("keydown", checkKey);
-        document.getElementById("aufnehmen").addEventListener("click", drawCard);
-        document.getElementById("sort").addEventListener("click", sortCards);
-    }
+  
 
     // Karten mischeln____________________________________________________________________ 
     function createHand(_x: number): void {
