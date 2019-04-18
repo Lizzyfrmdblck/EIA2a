@@ -185,11 +185,15 @@ namespace aufgabe03_verbessert {
 
         document.getElementById("discard").innerHTML = "";
         let div: HTMLElement = document.createElement("div");
-        document.getElementById("discard").appendChild(div);
+        
         div.innerHTML = handcards[index].cardValue;
-        div.innerHTML = handcards[index].cardfarbe;
-        div.classList.add(handcards[index].cardfarbe);
+        div.innerHTML += handcards[index].cardfarbe;
+     
+       // discard.classList.add("Karte");
+       // discard.innerText += " " + handcards[y].cardValue;
+        div.classList.add("Karte");
         div.classList.add("handCardStyle");
+        document.getElementById("discard").appendChild(div);
         handcards.splice(index, 1);
 
         displayHand();

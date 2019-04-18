@@ -128,7 +128,7 @@ var aufgabe03_verbessert;
     // Keyevent prüfen ob Leertaste______________________________________________________
     function checkKey(_event) {
         if (_event.keyCode == 32) {
-            console.log("space on fire");
+            console.log("leertaste klappt");
             drawCard();
         }
     }
@@ -151,11 +151,13 @@ var aufgabe03_verbessert;
         console.log(index);
         document.getElementById("discard").innerHTML = "";
         let div = document.createElement("div");
-        document.getElementById("discard").appendChild(div);
         div.innerHTML = handcards[index].cardValue;
-        div.innerHTML = handcards[index].cardfarbe;
-        div.classList.add(handcards[index].cardfarbe);
+        div.innerHTML += handcards[index].cardfarbe;
+        // discard.classList.add("Karte");
+        // discard.innerText += " " + handcards[y].cardValue;
+        div.classList.add("Karte");
         div.classList.add("handCardStyle");
+        document.getElementById("discard").appendChild(div);
         handcards.splice(index, 1);
         displayHand();
     }
