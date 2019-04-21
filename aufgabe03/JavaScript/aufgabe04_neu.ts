@@ -193,8 +193,7 @@ namespace aufgabe03_verbessert {
         div.innerHTML = handcards[index].cardValue;
         div.innerHTML += handcards[index].cardfarbe;
      
-       // discard.classList.add("Karte");
-       // discard.innerText += " " + handcards[y].cardValue;
+    
         div.classList.add("Karte");
         div.classList.add("handCardStyle");
         document.getElementById("discard").appendChild(div);
