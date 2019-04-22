@@ -118,7 +118,7 @@ var Ice;
     //Bestellung prüfen_______________________________________________________________________________
     function clickButton(_event) {
         let proof = [];
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 1; i++) {
             let inputs = document.getElementsByClassName("proof")[i];
             proof.push(inputs);
             console.log(inputs);

@@ -154,7 +154,7 @@ namespace Ice {
     function clickButton(_event: Event): void {
 
         let proof: HTMLInputElement[] = [];
-        for (let i: number = 0; i < 5; i++) {
+        for (let i: number = 0; i < 1; i++) {
             let inputs: HTMLInputElement = <HTMLInputElement>document.getElementsByClassName("proof")[i];
             proof.push(inputs);
             console.log(inputs);
