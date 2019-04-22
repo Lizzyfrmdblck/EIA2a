@@ -128,6 +128,7 @@ var Ice;
             if (proof[i].validity.valid == false) {
                 alert("Du hast noch nicht alles ausgefuellt.");
                 console.log("Angaben fehlen");
+                break;
             }
             else
                 (proof[i].validity.valid == true);
