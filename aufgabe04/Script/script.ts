@@ -163,10 +163,11 @@ namespace Ice {
             console.log(proof.length);
             if (proof[i].validity.valid == false) {
                 alert("Du hast noch nicht alles ausgefuellt.");
-                location.reload();
+                console.log("Angaben fehlen");      
             }
-            else {
-                alert("Vielen Dank fuer deine Bestellung.");
+
+            else (proof[i].validity.valid == true) {
+                alert("Danke für deine Bestellung.");
                 location.reload();
             }
         }
