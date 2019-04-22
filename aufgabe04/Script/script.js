@@ -45,6 +45,7 @@ var Ice;
             input.setAttribute("type", "number");
             input.setAttribute("value", "0");
             input.min = "0";
+            //input.max = "5";
             label.innerText = fruchtsorten[i];
             label.appendChild(input);
             fruchtInputs.push(input);
