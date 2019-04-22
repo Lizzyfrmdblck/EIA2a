@@ -1,5 +1,5 @@
 /*
-Aufgabe: 4 Ice Dealer
+Aufgabe: 4 Ice Dealer yo
 Name: Elyssia-Sofie Dürr
 Matrikel: 254764
 Datum: 21.04.2019
@@ -132,7 +132,7 @@ namespace Ice {
     }
     // Warenkorb Summe_______________________________________________________________________________
     function showSum(_event: Event): void {
-        let summe: number = 0;
+        let summe: number = 0; 
 
         for (let i: number = 0; i < fruchtInputs.length; i++) {
             summe += parseInt(fruchtInputs[i].value);
