@@ -5,7 +5,7 @@ Matrikel: 254764
 Datum: 21.04.2019
     
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe.
-Er wurde nicht kopiert und auch nicht diktiert. Teile der Aufgabe zusammen mit Jacqueline und Selina erstellt*/
+Er wurde nicht kopiert und auch nicht diktiert. */
 var Ice;
 (function (Ice) {
     window.addEventListener("load", init);
