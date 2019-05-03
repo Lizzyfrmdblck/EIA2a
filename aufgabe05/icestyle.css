@@ -20,7 +20,7 @@
 		margin-left: 1em;
 	}
 	#title {
-		font-size: 2em;
+		font-size: 3em;
 		color: #F781D8;
 		text-align: center;
 		font-family: 'Pacifico', cursive;
@@ -32,7 +32,8 @@
 		display: block;
 		vertical-align: top
 	}
-	input[type="number"], input[type="radio"], input[type="checkbox"], label {
+	input[type="number"], input[type="radio"], input[type="checkbox"], label
+		{
 		display: inline;
 	}
 	::after {
@@ -66,11 +67,11 @@
 		margin-bottom: 3%;
 	}
 	#check {
-		margin-left: 29%;
+		margin-left: 30%;
 		background-color: #F781D8;
 		border: 1px solid #F781D8;
 		padding: 5%;
-		margin-top: 1%;
+		margin-top: 5%;
 		margin-bottom: 5%;
 		font-family: 'Raleway', sans-serif;
 		font-size: 1em;
@@ -83,14 +84,17 @@
 		margin: 0px;
 		padding: 0px;
 	}
+	#priceDiv {
+		border-top: 1px solid black;
+	}
 }
 
 @media screen and (min-width:1024px) {
-	#cart {
+	#basketFs {
 		position: absolute;
 		float: right;
-		top: 10em;
-		margin-left: 50%;
+		top: 8.75em;
+		margin-left: 55%;
 		margin-top: 0.5% !important;
 	}
 	fieldset {

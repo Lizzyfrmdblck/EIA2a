@@ -2,7 +2,7 @@
 Aufgabe: 5 Ice Dealer reloaded
 Name: Elyssia-Sofie Dürr
 Matrikel: 254764
-Datum: 28.04.2019
+Datum: 02.05.2019
     
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
 Er wurde nicht kopiert und auch nicht diktiert. 
@@ -22,17 +22,17 @@ Er wurde nicht kopiert und auch nicht diktiert.
 </head>
 
 <body>
-	<h1 id="title">ICE ICE BABY <br>reloaded</h1>
+	<h1 id="title">ICE ICE BABY</h1>
 
 	<div id="allProducts"></div>
 	<fieldset id="adress">
 		<legend>Adresse</legend>
-		<!-- Name-->
+		<!-- full-name input-->
 		<div class="control-group">
 			<label class="control-label">Vorname</label>
 			<div>
 				<input class="adress" id="first-name" name="first-name" type="text"
-					placeholder="Dein Vorname" required />
+					pattern="[a-zA-ZäöüÄÖÜ]+" placeholder="Dein Vorname" required />
 				<p class="help-block"></p>
 
 			</div>
@@ -41,7 +41,7 @@ Er wurde nicht kopiert und auch nicht diktiert.
 			<label class="control-label">Nachname</label>
 			<div>
 				<input class="adress" id="last-name" name="last-name" type="text"
-					placeholder="Dein Nachname" required />
+					pattern="[a-zA-ZäöüÄÖÜ]+" placeholder="Dein Nachname" required />
 				<p class="help-block"></p>
 			</div>
 		</div>
@@ -50,17 +50,17 @@ Er wurde nicht kopiert und auch nicht diktiert.
 			<label class="control-label">Straße</label>
 			<div class="controls">
 				<input class="adress" id="city" name="city" type="text"
-					placeholder="Deine Straße" class="input-xlarge" required />
+					pattern="[a-zA-ZäöüÄÖÜ \.0-9]+[0-9]+" placeholder="Deine Straße" class="input-xlarge" required />
 				<p class="help-block"></p>
 			</div>
 		</div>
 
-		<!--  Ort -->
+		<!--  Wohnort -->
 		<div class="control-group">
 			<label class="control-label">Wohnort</label>
 			<div class="controls">
 				<input class="adress" id="city" name="city" type="text"
-					placeholder="Dein Wohnort" class="input-xlarge" required />
+					pattern="[a-zA-Z]+" placeholder="Dein Wohnort" class="input-xlarge" required />
 				<p class="help-block"></p>
 			</div>
 		</div>
@@ -70,29 +70,28 @@ Er wurde nicht kopiert und auch nicht diktiert.
 			<label class="control-label">Postleitzahl</label>
 			<div class="controls">
 				<input class="adress" id="postal-code" name="postal-code"
-					type="text" placeholder="Postleitzahl" class="input-xlarge"
+					type="text" pattern="[0-9]{5}" placeholder="Postleitzahl" class="input-xlarge"
 					required />
 				<p class="help-block"></p>
 			</div>
 		</div>
-		<!-- Land -->
+		<!-- country select -->
 		<div class="control-group">
 			<label class="control-label">Land</label>
 			<div class="controls">
-				<select class="adress" id="country" name="country">
-					<option value="" selected="selected"></option>
-
-					<option value="AT">Österreich</option>
-					<option value="DE">Deutschland</option>
-					<option value="CH">Schweiz</option>
-
-				</select>
+				<input class="adress" id="country" name="country" type="text"
+					pattern="[a-zA-ZäöüÄÖÜ]+" placeholder="Land" class="input-xlarge" required />
+				<p class="help-block"></p>
 			</div>
 		</div>
 	</fieldset>
 	<button id="check">Überprüfen</button>
-	<fieldset id="cart">
+	<fieldset id="basketFs">
 		<legend>Warenkorb</legend>
+		<div id="basketDiv"></div>
+		<div id="priceDiv"></div>
+		<div id="checkDiv"></div>
+		<div id="adressDiv"></div>
 	</fieldset>
 
 </body>

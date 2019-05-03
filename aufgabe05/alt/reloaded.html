@@ -1,0 +1,99 @@
+<!--  
+Aufgabe: 5 Ice Dealer reloaded
+Name: Elyssia-Sofie Dürr
+Matrikel: 254764
+Datum: 03.05.2019
+    
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
+Er wurde nicht kopiert und auch nicht diktiert. 
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>IceIceBaby</title>
+<script src="main.js"></script>
+<script src="array.js"></script>
+<link rel="stylesheet" href="icestyle.css" type="text/css" />
+
+
+</head>
+
+<body>
+	<h1 id="title">ICE ICE BABY <br>reloaded</h1>
+
+	<div id="allProducts"></div>
+	<fieldset id="adress">
+		<legend>Adresse</legend>
+		<!-- Name-->
+		<div class="control-group">
+			<label class="control-label">Vorname</label>
+			<div>
+				<input class="adress" id="first-name" name="first-name" type="text"
+					placeholder="Dein Vorname" required />
+				<p class="help-block"></p>
+
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Nachname</label>
+			<div>
+				<input class="adress" id="last-name" name="last-name" type="text"
+					placeholder="Dein Nachname" required />
+				<p class="help-block"></p>
+			</div>
+		</div>
+		<!-- Straße -->
+		<div class="control-group">
+			<label class="control-label">Straße</label>
+			<div class="controls">
+				<input class="adress" id="city" name="city" type="text"
+					placeholder="Deine Straße" class="input-xlarge" required />
+				<p class="help-block"></p>
+			</div>
+		</div>
+
+		<!--  Ort -->
+		<div class="control-group">
+			<label class="control-label">Wohnort</label>
+			<div class="controls">
+				<input class="adress" id="city" name="city" type="text"
+					placeholder="Dein Wohnort" class="input-xlarge" required />
+				<p class="help-block"></p>
+			</div>
+		</div>
+
+		<!-- PLZ -->
+		<div class="control-group">
+			<label class="control-label">Postleitzahl</label>
+			<div class="controls">
+				<input class="adress" id="postal-code" name="postal-code"
+					type="text" placeholder="Postleitzahl" class="input-xlarge"
+					required />
+				<p class="help-block"></p>
+			</div>
+		</div>
+		<!-- Land -->
+		<div class="control-group">
+			<label class="control-label">Land</label>
+			<div class="controls">
+				<select class="adress" id="country" name="country">
+					<option value="" selected="selected"></option>
+
+					<option value="AT">Österreich</option>
+					<option value="DE">Deutschland</option>
+					<option value="CH">Schweiz</option>
+
+				</select>
+			</div>
+		</div>
+	</fieldset>
+	<button id="check">Überprüfen</button>
+	<fieldset id="cart">
+		<legend>Warenkorb</legend>
+	</fieldset>
+
+</body>
+</html>
