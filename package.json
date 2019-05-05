@@ -5,12 +5,13 @@
 	"author": "Jirka, adapted by Lukas",
 	"main": "Server.js",
 	"scripts": {
-		"start": "node L05_Server/Server/Server.js"
+		"start": "node server.js"
 	},
 	"engines": {
 		"node": "8.11.3"
 	},
 	"dependencies": {
-		"@types/node": "^11.13.10"
+		"@types/node": "^11.13.10",
+		"node": "^12.1.0"
 	}
 }
