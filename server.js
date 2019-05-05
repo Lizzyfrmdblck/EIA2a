@@ -1,31 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Http = require("http"); //Import eines Modul als HTTP Objekt
-const Url = require("url");
-var L06_SendData;
-(function (L06_SendData) {
-    console.log("bla");
-    console.log("Starting server"); //Consolelog wird ausgegeben mit nachricht "Starting server"
-    let port = process.env.PORT; //Stellt den PORT als number ein zum Heroku server  
-    if (port == undefined) //Falls der Port nicht definiert ist,
-        port = 8100; //soll er die nummer 8100 haben (verbindet Heroku mit EIA2)
-    let item = [];
-    let server = Http.createServer(); //variable server wird als typ Http.Server und wird als Http.creatserver funktion gleichgesetzt
-    server.addListener("request", handleRequest); //F�gt einen Listener hinzu der dem h�ndler bescheid gibt wenn handleRequest getriggert wurde
-    server.addListener("listening", handleListen); //solange der K�ufer auf die funktion zugreift, sieht der H�ndler das.
-    server.listen(port); //schaut zu was f�r ein Port verwendet wird. (8100)
+const Http = require("http");
+var L05_Server;
+(function (L05_Server) {
+    console.log("Starting server");
+    let port = Number(process.env.PORT);
+    if (!port)
+        port = 8100;
+    let server = Http.createServer();
+    server.addListener("request", handleRequest);
+    server.addListener("listening", handleListen);
+    server.listen(port);
     function handleListen() {
-        console.log("Listening"); //Consolelog "Listening" wird ausgegeben
+        console.log("Listening");
     }
     function handleRequest(_request, _response) {
-        //console.log("I hear voices")      // gibt Consolelog "I hear voices!" aus
+        console.log("I hear voices!");
+        //Der Text vom Request soll im Terminal erscheinen
         console.log(_request.url);
-        _response.setHeader("content-type", "text/html; charset=utf-8"); //setzt in den HTML header "content-type" und text/html; charset=utf-8
-        _response.setHeader("Access-Control-Allow-Origin", "*"); //Access-Control-Allow-Origin wird auch in den Header gesetzt, damit die antwort des Codes mit dem Nutzer geteilt wird.
-        let url = Url.parse(_request.url, true);
-        for (let key in url.query)
-            _response.write(key + ":" + url.query[key] + "<br/>");
+        _response.setHeader("content-type", "text/html; charset=utf-8");
+        _response.setHeader("Access-Control-Allow-Origin", "*");
+        _response.write(_request.url);
         _response.end();
     }
-})(L06_SendData || (L06_SendData = {}));
+})(L05_Server || (L05_Server = {}));
 //# sourceMappingURL=server.js.map
