@@ -1,0 +1,15 @@
+Aufgabe 6 Lösungen:
+
+Zunächst Terminal in Visual Studio Code benutzen (unten)
+Dann Kommandos für die Aufgaben eingeben
+2.1: npm install @types/node
+2.2: node .
+2.3: Im Browser URL localhost:8100 eingeben
+2.5: Siehe server.types
+2.6: STRG+C im 
+
+3.1: package.json im Ordner erstellen, dann im Terminal:
+"git add package.json"
+"git commit -m "package.json""
+"git push"
+3.2:  läuft
