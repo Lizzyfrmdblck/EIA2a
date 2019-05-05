@@ -1,5 +1,6 @@
 var iceice;
 (function (iceice) {
+    let address = "https://eia2a-aufgabe6.herokuapp.com";
     window.addEventListener("load", init);
     let inputs = document.getElementsByTagName("input");
     function init() {
@@ -12,6 +13,7 @@ var iceice;
             let fieldset = fieldsets[i];
             fieldset.addEventListener("change", handleClick);
         }
+        setupAsyncForm();
     }
     // fieldset und input elemente erstellen____________________________________________________________________________________
     function createFormular() {
@@ -184,6 +186,28 @@ var iceice;
                 checkDiv.appendChild(p);
                 p.innerText = "Du musst noch " + key + " auswählen!";
             }
+        }
+    }
+    function setupAsyncForm() {
+        let button = document.getElementById("submitbutton");
+        button.addEventListener("click", handleClickOnAsync);
+    }
+    function handleClickOnAsync(_event) {
+        let name = document.querySelector("#basketFs").innerText;
+        sendRequestWithCustomData(name);
+    }
+    function sendRequestWithCustomData(_name) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", address + "?name=" + _name, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
+    }
+    function handleStateChange(_event) {
+        var xhr = _event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            alert(xhr.response);
+            console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
+            console.log("response: " + xhr.response);
         }
     }
 })(iceice || (iceice = {}));

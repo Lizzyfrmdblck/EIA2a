@@ -17,7 +17,7 @@ namespace L05_Server {
 
 	function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
 		console.log("I hear voices!");
-        //Der Text vom Request soll im Terminal erscheinen
+        //Der Text vom Request soll im Terminal erscheinen (A2.4)
         console.log(_request.url);
 		_response.setHeader("content-type", "text/html; charset=utf-8");
 		_response.setHeader("Access-Control-Allow-Origin", "*");

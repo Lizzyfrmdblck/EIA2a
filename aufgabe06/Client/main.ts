@@ -1,5 +1,8 @@
 namespace iceice {
 
+
+    let address: string = "https://eia2a-aufgabe6.herokuapp.com";
+
     window.addEventListener("load", init);
 
     let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
@@ -18,6 +21,7 @@ namespace iceice {
             let fieldset: HTMLFieldSetElement = fieldsets[i];
             fieldset.addEventListener("change", handleClick);
         }
+        setupAsyncForm();
     }
 
     // fieldset und input elemente erstellen____________________________________________________________________________________
@@ -223,4 +227,30 @@ namespace iceice {
         }
     }
 
+    function setupAsyncForm(): void {
+        let button: Element = document.getElementById("submitbutton");
+        button.addEventListener("click", handleClickOnAsync);
+    }
+
+    function handleClickOnAsync(_event: Event): void {
+        let name: string = (<HTMLInputElement>document.querySelector("#basketFs")).innerText;
+        console.log(name);
+        sendRequestWithCustomData(name);
+    }
+
+    function sendRequestWithCustomData(_name: string): void {
+        let xhr: XMLHttpRequest = new XMLHttpRequest();
+        xhr.open("GET", address + "?name=" + _name, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
+    }
+
+    function handleStateChange(_event: ProgressEvent): void {
+        var xhr: XMLHttpRequest = <XMLHttpRequest>_event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            alert(xhr.response);
+            console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
+            console.log("response: " + xhr.response);
+        }
+    }
 }
