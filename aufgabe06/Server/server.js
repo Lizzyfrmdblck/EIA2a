@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Http = require("http");
-var L05_Server;
-(function (L05_Server) {
+var eisdealer_server;
+(function (eisdealer_server) {
     console.log("Starting server");
     let port = Number(process.env.PORT);
     if (!port)
@@ -23,5 +23,5 @@ var L05_Server;
         _response.write(_request.url);
         _response.end();
     }
-})(L05_Server || (L05_Server = {}));
+})(eisdealer_server || (eisdealer_server = {}));
 //# sourceMappingURL=server.js.map

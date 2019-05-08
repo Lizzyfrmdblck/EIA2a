@@ -1,31 +1,32 @@
-var iceice;
-(function (iceice) {
+var eisdealer_client;
+(function (eisdealer_client) {
     let address = "https://eia2a-aufgabe6.herokuapp.com";
+    let url = "";
     window.addEventListener("load", init);
+    let testAdresse = false;
+    let testBestellung = false;
     let inputs = document.getElementsByTagName("input");
     function init() {
         createFormular();
-        let checkButton = document.getElementById("check");
+        document.getElementById("checkButton").addEventListener("click", checkInput);
         let fieldsets = document.getElementsByTagName("fieldset");
-        checkButton.addEventListener("click", checkInput);
-        //      für jedes fieldset in der node list event listener hinzufügen
+        // für jedes fieldset in der node list event listener hinzufügen
         for (let i = 0; i < fieldsets.length; i++) {
             let fieldset = fieldsets[i];
             fieldset.addEventListener("change", handleClick);
         }
-        setupAsyncForm();
     }
     // fieldset und input elemente erstellen____________________________________________________________________________________
     function createFormular() {
         //für jeden key in _products (Behälter, Fruchteis, Milcheis...)
-        for (let key in iceice.products) {
+        for (let key in eisdealer_client.products) {
             let fieldsetId = document.createElement("fieldset");
             fieldsetId.setAttribute("id", key);
             document.getElementById("allProducts").appendChild(fieldsetId);
             let legend = document.createElement("legend");
             legend.innerText = key;
             fieldsetId.appendChild(legend);
-            let productList = iceice.products[key];
+            let productList = eisdealer_client.products[key];
             // dürchläuft innere Arrays
             // für key == Fruchteis >> Mango, Erdbeere, Banane...
             for (let i = 0; i < productList.length; i++) {
@@ -37,19 +38,21 @@ var iceice;
                 input.setAttribute("price", productList[i].price.toString());
                 input.setAttribute("basket", "false");
                 switch (key) {
-                    case ("Behälter"):
+                    case ("Behaelter"):
                     case ("Lieferung"):
                         input.setAttribute("type", "radio");
                         input.setAttribute("name", "radioGroup_" + key);
+                        input.setAttribute("value", productList[i].name);
                         break;
                     case ("Extras"):
                         input.setAttribute("type", "checkbox");
-                        input.setAttribute("name", "checkGroup_" + key);
+                        input.setAttribute("name", productList[i].name);
+                        input.setAttribute("value", productList[i].name);
                         break;
                     case ("Fruchteis"):
                     case ("Milcheis"):
                         input.setAttribute("type", "number");
-                        input.setAttribute("name", "stepGroup_" + key);
+                        input.setAttribute("name", productList[i].name);
                         input.setAttribute("min", "0");
                         input.setAttribute("max", "10");
                         input.setAttribute("step", "1");
@@ -111,6 +114,9 @@ var iceice;
     }
     // Warenkorb wird geschrieben________________________________________________________________________________
     function writeBasket() {
+        if (testAdresse == true && testBestellung == true) {
+            document.getElementById("submitButton").addEventListener("click", sendOrder);
+        }
         let basketFs = document.getElementById("basketFs");
         let basketDiv = document.getElementById("basketDiv");
         let inputs = document.getElementsByTagName("input");
@@ -163,6 +169,7 @@ var iceice;
         if (check == 6) {
             adressString += "\n" + "Deine Lieferadresse:" + "\n";
             adressString += adressInputs[0].value + ", " + adressInputs[1].value + "\n" + adressInputs[2].value + "\n" + adressInputs[3].value + "  " + adressInputs[4].value + "\n" + adressInputs[5].value;
+            testAdresse = true;
         }
         else {
             adressString += "Daten sind falsch || unvollständig";
@@ -175,40 +182,40 @@ var iceice;
         let basketPs = document.getElementById("basketDiv").getElementsByTagName("p");
         let checkDiv = document.getElementById("checkDiv");
         let checkArray = [];
+        let checkInput = 0;
         checkDiv.innerText = "";
         for (let i = 0; i < basketPs.length; i++) {
             let attribute = basketPs[i].getAttribute("key");
             checkArray.push(attribute);
         }
-        for (let key in iceice.products) {
+        for (let key in eisdealer_client.products) {
             if (checkArray.indexOf(key) == -1) {
                 let p = document.createElement("p");
                 checkDiv.appendChild(p);
                 p.innerText = "Du musst noch " + key + " auswählen!";
             }
+            else {
+                checkInput++;
+            }
+        }
+        if (checkInput == 5) {
+            testBestellung = true;
         }
     }
-    function setupAsyncForm() {
-        let button = document.getElementById("submitbutton");
-        button.addEventListener("click", handleClickOnAsync);
-    }
-    function handleClickOnAsync(_event) {
-        let name = document.querySelector("#basketFs").innerText;
-        sendRequestWithCustomData(name);
-    }
-    function sendRequestWithCustomData(_name) {
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", address + "?name=" + _name, true);
-        xhr.addEventListener("readystatechange", handleStateChange);
-        xhr.send();
-    }
-    function handleStateChange(_event) {
-        var xhr = _event.target;
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            alert(xhr.response);
-            console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
-            console.log("response: " + xhr.response);
+    // zeug was an server geschickt wurde anzeigen 
+    function sendOrder() {
+        let writeURL = "https://eia2a-aufgabe6.herokuapp.com/?";
+        let inputAll = document.getElementsByTagName("input");
+        for (let input of inputAll) {
+            if (input.checked == true)
+                writeURL += `${input.name}=${input.value}&`;
+            if (input.type == "number" && parseFloat(input.value) >= 1)
+                writeURL += `${input.name}=${input.value}&`;
+            if (input.type == "text")
+                writeURL += `${input.name}=${input.value}&`;
         }
+        console.log(writeURL);
+        window.open(writeURL);
     }
-})(iceice || (iceice = {}));
+})(eisdealer_client || (eisdealer_client = {})); //namespace
 //# sourceMappingURL=main.js.map

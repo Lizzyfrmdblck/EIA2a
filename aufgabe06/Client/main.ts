@@ -1,27 +1,27 @@
-namespace iceice {
+namespace eisdealer_client {
 
 
     let address: string = "https://eia2a-aufgabe6.herokuapp.com";
+    let url: string = "";
 
     window.addEventListener("load", init);
 
-    let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
+    let testAdresse: boolean = false;
+    let testBestellung: boolean = false;
+    let inputs: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input");
 
     function init(): void {
 
         createFormular();
 
-        let checkButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("check");
-        let fieldsets: NodeListOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
+        document.getElementById("checkButton").addEventListener("click", checkInput);
+        let fieldsets: HTMLCollectionOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
 
-        checkButton.addEventListener("click", checkInput);
-
-        //      für jedes fieldset in der node list event listener hinzufügen
+        // für jedes fieldset in der node list event listener hinzufügen
         for (let i: number = 0; i < fieldsets.length; i++) {
             let fieldset: HTMLFieldSetElement = fieldsets[i];
             fieldset.addEventListener("change", handleClick);
         }
-        setupAsyncForm();
     }
 
     // fieldset und input elemente erstellen____________________________________________________________________________________
@@ -56,19 +56,21 @@ namespace iceice {
                 input.setAttribute("basket", "false");
 
                 switch (key) {
-                    case ("Behälter"):
+                    case ("Behaelter"):
                     case ("Lieferung"):
                         input.setAttribute("type", "radio");
                         input.setAttribute("name", "radioGroup_" + key);
+                        input.setAttribute("value", productList[i].name);
                         break;
                     case ("Extras"):
                         input.setAttribute("type", "checkbox");
-                        input.setAttribute("name", "checkGroup_" + key);
+                        input.setAttribute("name", productList[i].name);
+                        input.setAttribute("value", productList[i].name);
                         break;
                     case ("Fruchteis"):
                     case ("Milcheis"):
                         input.setAttribute("type", "number");
-                        input.setAttribute("name", "stepGroup_" + key);
+                        input.setAttribute("name", productList[i].name);
                         input.setAttribute("min", "0");
                         input.setAttribute("max", "10");
                         input.setAttribute("step", "1");
@@ -91,7 +93,7 @@ namespace iceice {
         //Variable Target ist das Element, das verändert wurde
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
         //Nodelist von allen Input Elementen
-        let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
+        let inputs: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input");
 
 
         //Fallunterscheidung: Wenn das target ein radio ist 
@@ -125,13 +127,16 @@ namespace iceice {
         }
     }
 
-
     // Warenkorb wird geschrieben________________________________________________________________________________
     function writeBasket(): void {
 
+        if (testAdresse == true && testBestellung == true) {
+            document.getElementById("submitButton").addEventListener("click", sendOrder);
+        }
+
         let basketFs: HTMLFieldSetElement = <HTMLFieldSetElement>document.getElementById("basketFs");
         let basketDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("basketDiv");
-        let inputs: NodeListOf<HTMLInputElement> = document.getElementsByTagName("input");
+        let inputs: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input");
 
         basketDiv.innerText = "";
 
@@ -164,7 +169,7 @@ namespace iceice {
 
         let priceDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("priceDiv");
         basketFs.appendChild(priceDiv);
-        let priceParts: NodeListOf<HTMLParagraphElement> = basketDiv.getElementsByTagName("p");
+        let priceParts: HTMLCollectionOf<HTMLParagraphElement> = basketDiv.getElementsByTagName("p");
 
         priceDiv.innerHTML = "";
         let endPrice: number = 0;
@@ -180,7 +185,7 @@ namespace iceice {
     function writeAdress(): void {
         let adressDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("adressDiv");
         let adressFs: HTMLFieldSetElement = <HTMLFieldSetElement>document.getElementById("adress");
-        let adressInputs: NodeListOf<HTMLInputElement> = document.getElementById("adress").getElementsByTagName("input");
+        let adressInputs: HTMLCollectionOf<HTMLInputElement> = document.getElementById("adress").getElementsByTagName("input");
         let adressP: HTMLParagraphElement = document.createElement("p");
 
         let check: number = 0;
@@ -194,6 +199,7 @@ namespace iceice {
         if (check == 6) {
             adressString += "\n" + "Deine Lieferadresse:" + "\n";
             adressString += adressInputs[0].value + ", " + adressInputs[1].value + "\n" + adressInputs[2].value + "\n" + adressInputs[3].value + "  " + adressInputs[4].value + "\n" + adressInputs[5].value;
+            testAdresse = true;
         }
 
         else {
@@ -207,10 +213,10 @@ namespace iceice {
 
     //Prüft bestellte Artikel auf Vollständigkeit
     function checkInput(_event: Event): void {
-        let basketPs: NodeListOf<HTMLParagraphElement> = document.getElementById("basketDiv").getElementsByTagName("p");
+        let basketPs: HTMLCollectionOf<HTMLParagraphElement> = document.getElementById("basketDiv").getElementsByTagName("p");
         let checkDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("checkDiv");
         let checkArray: string[] = [];
-
+        let checkInput: number = 0;
         checkDiv.innerText = "";
 
         for (let i: number = 0; i < basketPs.length; i++) {
@@ -224,33 +230,37 @@ namespace iceice {
                 checkDiv.appendChild(p);
                 p.innerText = "Du musst noch " + key + " auswählen!";
             }
+            else {
+                checkInput++;
+            }
+        }
+
+        if (checkInput == 5) {
+            testBestellung = true;
         }
     }
 
-    function setupAsyncForm(): void {
-        let button: Element = document.getElementById("submitbutton");
-        button.addEventListener("click", handleClickOnAsync);
-    }
 
-    function handleClickOnAsync(_event: Event): void {
-        let name: string = (<HTMLInputElement>document.querySelector("#basketFs")).innerText;
-        console.log(name);
-        sendRequestWithCustomData(name);
-    }
+    // zeug was an server geschickt wurde anzeigen 
+    function sendOrder(): void {
 
-    function sendRequestWithCustomData(_name: string): void {
-        let xhr: XMLHttpRequest = new XMLHttpRequest();
-        xhr.open("GET", address + "?name=" + _name, true);
-        xhr.addEventListener("readystatechange", handleStateChange);
-        xhr.send();
-    }
+        let writeURL: string = "https://eia2a-aufgabe6.herokuapp.com/?";
 
-    function handleStateChange(_event: ProgressEvent): void {
-        var xhr: XMLHttpRequest = <XMLHttpRequest>_event.target;
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            alert(xhr.response);
-            console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
-            console.log("response: " + xhr.response);
+        let inputAll: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input")
+        for (let input of inputAll) {
+
+            if (input.checked == true)
+                writeURL += `${input.name}=${input.value}&`;
+
+            if (input.type == "number" && parseFloat(input.value) >= 1)
+                writeURL += `${input.name}=${input.value}&`;
+
+            if (input.type == "text")
+                writeURL += `${input.name}=${input.value}&`;
+
         }
+        console.log(writeURL);
+        window.open(writeURL);
     }
-}
+
+}//namespace

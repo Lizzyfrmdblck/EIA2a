@@ -1,7 +1,7 @@
-var iceice;
-(function (iceice) {
-    iceice.products = {
-        "Behälter": [
+var eisdealer_client;
+(function (eisdealer_client) {
+    eisdealer_client.products = {
+        "Behaelter": [
             { typ: "behaelter", name: "Waffel", price: 0.5 },
             { typ: "behaelter", name: "Becher", price: 0.5 }
         ],
@@ -40,5 +40,5 @@ var iceice;
             { typ: "ship", name: "unter Wasser", price: 7 }
         ]
     };
-})(iceice || (iceice = {}));
+})(eisdealer_client || (eisdealer_client = {}));
 //# sourceMappingURL=array.js.map
