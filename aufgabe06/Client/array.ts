@@ -36,7 +36,7 @@ namespace eisdealer_client {
             { typ: "milch", name: "Walnut", price: 2 },
             { typ: "milch", name: "Alpenkaramell", price: 2.5 },
             { typ: "milch", name: "Weihnachtszimt", price: 2.5 },
-            { typ: "milch", name: "Schwarzwälder Kirsch", price: 3 }
+            { typ: "milch", name: "Schwarzwaelder Kirsch", price: 3 }
         ],
 
         "Extras": [
