@@ -61,11 +61,12 @@ namespace eisdealer_client {
                         input.setAttribute("type", "radio");
                         input.setAttribute("name", "radioGroup_" + key);
                         input.setAttribute("value", productList[i].name);
+
                         break;
                     case ("Extras"):
                         input.setAttribute("type", "checkbox");
                         input.setAttribute("name", productList[i].name);
-                        input.setAttribute("value", productList[i].name);
+                        input.setAttribute("value", productList[i].price + "");
                         break;
                     case ("Fruchteis"):
                     case ("Milcheis"):
@@ -249,20 +250,21 @@ namespace eisdealer_client {
         let inputAll: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input")
         for (let input of inputAll) {
 
-            if (input.checked == true) {
+           /* if (input.checked == true) {
                 writeURL += `${input.name}=${input.value}&`;
             }
             if (input.type == "checkbox") {
                 writeURL += `${input.getAttribute("key")}=${input.name}&`;
             }
 
-            if (input.type == "number" && parseFloat(input.value) >= 1) {
-                writeURL += `${input.name}=${input.value}&`;
+            console.log(input.basket);
+            if (input.type == "number" && input.basket === "true") {
+                writeURL += `${input.name}=${input.price}&`;
             }
 
             if (input.type == "text") {
                 writeURL += `${input.name}=${input.value}&`;
-            }
+            }*/
 
         }
         console.log(writeURL);
