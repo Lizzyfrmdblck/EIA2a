@@ -1,6 +1,6 @@
 import * as Http from "http";
 
-namespace eisdealer_server {
+namespace eisdealer_client {
 	console.log("Starting server");
 	let port: number = Number(process.env.PORT);
 	if (!port)

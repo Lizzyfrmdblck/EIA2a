@@ -207,12 +207,18 @@ var eisdealer_client;
         let writeURL = "https://eia2a-aufgabe6.herokuapp.com/?";
         let inputAll = document.getElementsByTagName("input");
         for (let input of inputAll) {
-            if (input.checked == true)
+            if (input.checked == true) {
                 writeURL += `${input.name}=${input.value}&`;
-            if (input.type == "number" && parseFloat(input.value) >= 1)
+            }
+            if (input.type == "checkbox") {
+                writeURL += `${input.getAttribute("key")}=${input.name}&`;
+            }
+            if (input.type == "number" && parseFloat(input.value) >= 1) {
                 writeURL += `${input.name}=${input.value}&`;
-            if (input.type == "text")
+            }
+            if (input.type == "text") {
                 writeURL += `${input.name}=${input.value}&`;
+            }
         }
         console.log(writeURL);
         window.open(writeURL);

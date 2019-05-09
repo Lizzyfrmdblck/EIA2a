@@ -249,14 +249,20 @@ namespace eisdealer_client {
         let inputAll: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input")
         for (let input of inputAll) {
 
-            if (input.checked == true)
+            if (input.checked == true) {
                 writeURL += `${input.name}=${input.value}&`;
+            }
+            if (input.type == "checkbox") {
+                writeURL += `${input.getAttribute("key")}=${input.name}&`;
+            }
 
-            if (input.type == "number" && parseFloat(input.value) >= 1)
+            if (input.type == "number" && parseFloat(input.value) >= 1) {
                 writeURL += `${input.name}=${input.value}&`;
+            }
 
-            if (input.type == "text")
+            if (input.type == "text") {
                 writeURL += `${input.name}=${input.value}&`;
+            }
 
         }
         console.log(writeURL);
