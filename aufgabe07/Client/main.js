@@ -1,14 +1,16 @@
-var eisdealer_client;
-(function (eisdealer_client) {
+var BecomeKing;
+(function (BecomeKing) {
     let address = "https://eia2a-aufgabe6.herokuapp.com";
     let url = "";
+    //Test
     window.addEventListener("load", init);
     let testAdresse = false;
     let testBestellung = false;
     let inputs = document.getElementsByTagName("input");
     function init() {
         createFormular();
-        document.getElementById("checkButton").addEventListener("click", checkInput);
+        //   document.getElementById("submitButton").addEventListener("click", checkInput);
+        document.getElementById("submitButton").addEventListener("click", sendOrder);
         let fieldsets = document.getElementsByTagName("fieldset");
         // für jedes fieldset in der node list event listener hinzufügen
         for (let i = 0; i < fieldsets.length; i++) {
@@ -19,14 +21,14 @@ var eisdealer_client;
     // fieldset und input elemente erstellen____________________________________________________________________________________
     function createFormular() {
         //für jeden key in _products (Behälter, Fruchteis, Milcheis...)
-        for (let key in eisdealer_client.products) {
+        for (let key in BecomeKing.products) {
             let fieldsetId = document.createElement("fieldset");
             fieldsetId.setAttribute("id", key);
             document.getElementById("allProducts").appendChild(fieldsetId);
             let legend = document.createElement("legend");
             legend.innerText = key;
             fieldsetId.appendChild(legend);
-            let productList = eisdealer_client.products[key];
+            let productList = BecomeKing.products[key];
             // dürchläuft innere Arrays
             // für key == Fruchteis >> Mango, Erdbeere, Banane...
             for (let i = 0; i < productList.length; i++) {
@@ -188,7 +190,7 @@ var eisdealer_client;
             let attribute = basketPs[i].getAttribute("key");
             checkArray.push(attribute);
         }
-        for (let key in eisdealer_client.products) {
+        for (let key in BecomeKing.products) {
             if (checkArray.indexOf(key) == -1) {
                 let p = document.createElement("p");
                 checkDiv.appendChild(p);
@@ -207,24 +209,33 @@ var eisdealer_client;
         let writeURL = "https://eia2a-aufgabe6.herokuapp.com/?";
         let inputAll = document.getElementsByTagName("input");
         for (let input of inputAll) {
-            /*    if (input.checked == true) {
-                    writeURL += `${input.name}=${input.value}&`;
-                }
-                if (input.type == "checkbox") {
-                    writeURL += `${input.getAttribute("key")}=${input.name}&`;
-                }
-    
-                console.log(input.basket);
-                if (input.type == "number" && input.basket === "true") {
-                    writeURL += `${input.name}=${input.price}&`;
-                }
-    
-                if (input.type == "text") {
-                    writeURL += `${input.name}=${input.value}&`;
-                } */
+            if (input.checked == true) {
+                writeURL += `${input.name}=${input.value}&`;
+            }
+            if (input.type == "checkbox") {
+                writeURL += `${input.getAttribute("key")}=${input.name}&`;
+            }
+            console.log(input.basket);
+            if (input.type == "number" && input.basket === "true") {
+                writeURL += `${input.name}=${input.price}&`;
+            }
+            if (input.type == "text") {
+                writeURL += `${input.name}=${input.value}&`;
+            }
         }
-        console.log(writeURL);
-        window.open(writeURL);
+        sendRequestWithCustomData(url);
     }
-})(eisdealer_client || (eisdealer_client = {})); //namespace
+    function sendRequestWithCustomData(url) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
+    }
+    function handleStateChange(_event) {
+        let xhr = _event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            document.getElementById("submitÜbersicht").innerHTML = xhr.response;
+        }
+    }
+})(BecomeKing || (BecomeKing = {}));
 //# sourceMappingURL=main.js.map

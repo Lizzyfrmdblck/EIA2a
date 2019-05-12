@@ -66,7 +66,8 @@ namespace eisdealer_client {
                     case ("Extras"):
                         input.setAttribute("type", "checkbox");
                         input.setAttribute("name", productList[i].name);
-                        input.setAttribute("value", productList[i].price + "");
+                      //  input.setAttribute("value", productList[i].price + "");
+
                         break;
                     case ("Fruchteis"):
                     case ("Milcheis"):
@@ -250,7 +251,7 @@ namespace eisdealer_client {
         let inputAll: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input")
         for (let input of inputAll) {
 
-           /* if (input.checked == true) {
+        /*    if (input.checked == true) {
                 writeURL += `${input.name}=${input.value}&`;
             }
             if (input.type == "checkbox") {
@@ -264,11 +265,12 @@ namespace eisdealer_client {
 
             if (input.type == "text") {
                 writeURL += `${input.name}=${input.value}&`;
-            }*/
+            } */
 
         }
         console.log(writeURL);
         window.open(writeURL);
-    }
+    }   
+
 
 }//namespace
