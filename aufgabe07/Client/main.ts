@@ -274,6 +274,7 @@ namespace BecomeKing {
         sendRequestWithCustomData(url);
     }   
 
+
     function sendRequestWithCustomData(url: string): void {
         let xhr: XMLHttpRequest = new XMLHttpRequest();
         xhr.open("GET", url, true);
