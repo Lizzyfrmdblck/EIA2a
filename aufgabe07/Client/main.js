@@ -18,6 +18,7 @@ var BecomeKing;
     function init() {
         createFormular();
         let fieldsets = document.getElementsByTagName("fieldset");
+        // Hauptfehler 2: der untere Eventlistener muss zwingend existieren
         document.getElementById("checkButton").addEventListener("click", checkInput);
         console.log("addTestEvent");
         // für jedes fieldset in der node list event listener hinzufügen
@@ -211,6 +212,8 @@ var BecomeKing;
         }
         if (checkInput == 5) {
             testBestellung = true;
+            //Hauptfehler 2: man muss zuerst checken, erst wenn die prüfung erfolgreich war kann man submitten
+            // Eventlistener für checkButton (oben) ist irgendwie untergegangen gewesen
             if (testAdresse == true && testBestellung == true) {
                 console.log("add SendEvent");
                 document.getElementById("submitButton").addEventListener("click", sendOrder);
@@ -223,6 +226,7 @@ var BecomeKing;
         let url = "https://eia2a-aufgabe6.herokuapp.com/?";
         let inputAll = document.getElementsByTagName("input");
         for (let input of inputAll) {
+            // if/if/if angepasst an daten, die ich wirklich brauche
             if (input.type == "radio" && input.checked == true) {
                 url += `${input.getAttribute("key")}=${input.value}&`;
             }
@@ -236,6 +240,7 @@ var BecomeKing;
                 url += `${input.id}=${input.value}&`;
             }
         }
+        //Hauptfehler 1 >> falsche variable übergeben
         sendRequestWithCustomData(url);
     }
     function sendRequestWithCustomData(_url) {

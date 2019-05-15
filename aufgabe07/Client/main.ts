@@ -24,6 +24,7 @@ namespace BecomeKing {
         createFormular();
 
         let fieldsets: HTMLCollectionOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
+        // Hauptfehler 2: der untere Eventlistener muss zwingend existieren
         document.getElementById("checkButton").addEventListener("click", checkInput);
         console.log("addTestEvent");
 
@@ -237,6 +238,8 @@ namespace BecomeKing {
         if (checkInput == 5) {
             testBestellung = true;
 
+            //Hauptfehler 2: man muss zuerst checken, erst wenn die prüfung erfolgreich war kann man submitten
+            // Eventlistener für checkButton (oben) ist irgendwie untergegangen gewesen
             if (testAdresse == true && testBestellung == true) {
                 console.log("add SendEvent");
                 document.getElementById("submitButton").addEventListener("click", sendOrder);
@@ -254,6 +257,7 @@ namespace BecomeKing {
         let inputAll: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input")
         for (let input of inputAll) {
 
+            // if/if/if angepasst an daten, die ich wirklich brauche
             if (input.type == "radio" && input.checked == true) {
                 url += `${input.getAttribute("key")}=${input.value}&`;
             }
@@ -270,6 +274,8 @@ namespace BecomeKing {
                 url += `${input.id}=${input.value}&`;
             }
         }
+
+        //Hauptfehler 1 >> falsche variable übergeben
         sendRequestWithCustomData(url);
     }
 
