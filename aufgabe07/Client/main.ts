@@ -262,7 +262,7 @@ namespace BecomeKing {
                 url += `${input.getAttribute("key")}=${input.name}&`;
             }
 
-            if (input.type == "number" && parseFloat(input.value) > 0) {
+            if (input.type == "number" && 0 < parseFloat(input.value)) {
                 url += `${input.getAttribute("key")}=${input.value}x${input.name}&`;
             }
 
