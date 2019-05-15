@@ -265,24 +265,33 @@ namespace BecomeKing {
         let inputAll: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input")
         for (let input of inputAll) {
 
-            if (input.checked == true) {
-                url += `${input.name}=${input.value}&`;
+            if (input.type == "radio" && input.checked == true) {
+                url += `${input.key}=${input.value}&`;
             }
-            if (input.type == "checkbox") {
-                url += `${input.getAttribute("key")}=${input.name}&`;
+            if (input.type == "checkbox" && input.checked == true) {
+                url += `${input.key}=${input.name}&`;
             }
 
-            console.log(input.basket);
-            if (input.type == "number" && input.basket === "true") {
-                url += `${input.name}=${input.price}&`;
+            if (input.type == "number" && parseFloat(input.value) > 0) {
+                url += `${input.key}=${input.value}x${input.name}&`;
             }
 
             if (input.type == "text") {
-                url += `${input.name}=${input.value}&`;
+                url += `${input.id}=${input.value}&`;
             }
 
         }
-
+        //https://eia2a-aufgabe6.herokuapp.com/?
+        //radioGroup_Behaelter=Waffel&
+        //Sahne=on&
+        //Extras=Sahne&Extras=Smarties&Extras=Chocosauce&Extras=Erdbeersauce&Extras=Kokosraspeln&Extras=kleine%20Oreos&Extras=kleine%20Cookies&Extras=bunte%20Streusel
+        //&radioGroup_Lieferung=Express
+        //&first-name=Max
+        //&last-name=Mustermann
+        //&street=Musterstrase%203
+        //&city=Musterstadt
+        //&postal-code=72227
+        //&country=de&
         sendRequestWithCustomData(url);
     }
 
