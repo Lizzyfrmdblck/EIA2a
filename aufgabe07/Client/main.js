@@ -230,7 +230,7 @@ var BecomeKing;
                 writeURL += `${input.name}=${input.value}&`;
             }
         }
-        sendRequestWithCustomData(url);
+        sendRequestWithCustomData(writeURL);
     }
     function sendRequestWithCustomData(url) {
         let xhr = new XMLHttpRequest();

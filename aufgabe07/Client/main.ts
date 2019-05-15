@@ -281,7 +281,7 @@ namespace BecomeKing {
 
         }
 
-        sendRequestWithCustomData(url);
+        sendRequestWithCustomData(writeURL);
     }
 
     function sendRequestWithCustomData(url: string): void {
