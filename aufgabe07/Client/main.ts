@@ -16,6 +16,7 @@ namespace BecomeKing {
 
         let fieldsets: HTMLCollectionOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
         document.getElementById("checkButton").addEventListener("click", checkInput);    
+        console.log("addTestEvent");
 
         // für jedes fieldset in der node list event listener hinzufügen
         for (let i: number = 0; i < fieldsets.length; i++) {
@@ -133,6 +134,8 @@ namespace BecomeKing {
     function writeBasket(): void {
 
         if (testAdresse == true && testBestellung == true) {
+            console.log("add Send Event");
+
             document.getElementById("submitButton").addEventListener("click", sendOrder);
         }
 
@@ -215,6 +218,8 @@ namespace BecomeKing {
 
     //Prüft bestellte Artikel auf Vollständigkeit
     function checkInput(_event: Event): void {
+        console.log("start Test");
+
         let basketPs: HTMLCollectionOf<HTMLParagraphElement> = document.getElementById("basketDiv").getElementsByTagName("p");
         let checkDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("checkDiv");
         let checkArray: string[] = [];
@@ -245,6 +250,7 @@ namespace BecomeKing {
 
     // zeug was an server geschickt wurde anzeigen 
     function sendOrder(): void {
+        console.log("fire Request");
 
          let writeURL: string = "https://eia2a-aufgabe6.herokuapp.com/?";
 

@@ -11,6 +11,7 @@ var BecomeKing;
         createFormular();
         let fieldsets = document.getElementsByTagName("fieldset");
         document.getElementById("checkButton").addEventListener("click", checkInput);
+        console.log("addTestEvent");
         // für jedes fieldset in der node list event listener hinzufügen
         for (let i = 0; i < fieldsets.length; i++) {
             let fieldset = fieldsets[i];
@@ -116,6 +117,7 @@ var BecomeKing;
     // Warenkorb wird geschrieben________________________________________________________________________________
     function writeBasket() {
         if (testAdresse == true && testBestellung == true) {
+            console.log("add Send Event");
             document.getElementById("submitButton").addEventListener("click", sendOrder);
         }
         let basketFs = document.getElementById("basketFs");
@@ -180,6 +182,7 @@ var BecomeKing;
     }
     //Prüft bestellte Artikel auf Vollständigkeit
     function checkInput(_event) {
+        console.log("start Test");
         let basketPs = document.getElementById("basketDiv").getElementsByTagName("p");
         let checkDiv = document.getElementById("checkDiv");
         let checkArray = [];
@@ -205,6 +208,7 @@ var BecomeKing;
     }
     // zeug was an server geschickt wurde anzeigen 
     function sendOrder() {
+        console.log("fire Request");
         let writeURL = "https://eia2a-aufgabe6.herokuapp.com/?";
         let inputAll = document.getElementsByTagName("input");
         for (let input of inputAll) {
