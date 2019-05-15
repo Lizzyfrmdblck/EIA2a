@@ -257,13 +257,16 @@ namespace BecomeKing {
             if (input.type == "radio" && input.checked == true) {
                 url += `${input.getAttribute("key")}=${input.value}&`;
             }
-            else if (input.type == "checkbox" && input.checked == true) {
+
+            if (input.type == "checkbox" && input.checked == true) {
                 url += `${input.getAttribute("key")}=${input.name}&`;
             }
-            else if (input.type == "number" && parseFloat(input.value) > 0) {
+
+            if (input.type == "number" && parseFloat(input.value) > 0) {
                 url += `${input.getAttribute("key")}=${input.value}x${input.name}&`;
             }
-            else {
+
+            if (input.type == "text") {
                 url += `${input.id}=${input.value}&`;
             }
         }
