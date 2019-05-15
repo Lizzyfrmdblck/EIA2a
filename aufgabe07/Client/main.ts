@@ -14,8 +14,8 @@ namespace BecomeKing {
 
         createFormular();
 
-
         let fieldsets: HTMLCollectionOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
+        document.getElementById("checkButton").addEventListener("click", checkInput);    
 
         // für jedes fieldset in der node list event listener hinzufügen
         for (let i: number = 0; i < fieldsets.length; i++) {

@@ -10,6 +10,7 @@ var BecomeKing;
     function init() {
         createFormular();
         let fieldsets = document.getElementsByTagName("fieldset");
+        document.getElementById("checkButton").addEventListener("click", checkInput);
         // für jedes fieldset in der node list event listener hinzufügen
         for (let i = 0; i < fieldsets.length; i++) {
             let fieldset = fieldsets[i];
