@@ -19,7 +19,7 @@ var BecomeKing;
         console.log("I hear voices!");
         _response.setHeader("content-type", "text/html; charset=utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
-        _response.write("<h4>Wir konnten folgende Bestellung entgegennehmen.</h4>");
+        _response.write("<h4>Wir konnten folgende Bestellung ehjkhkjhkjhkjhkntgegennehmen.</h4>");
         let url = Url.parse(_request.url, true);
         for (let key in url.query)
             _response.write("<p>" + key + url.query[key] + "</p>");

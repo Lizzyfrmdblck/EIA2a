@@ -1,6 +1,7 @@
 var BecomeKing;
 (function (BecomeKing) {
-    let address = "https://eia2a-aufgabe6.herokuapp.com";
+    //let address = "https://eia2a-aufgabe6.herokuapp.com";
+    let address = "https://127.0.0.1:80";
     let url = "";
     //Test
     window.addEventListener("load", init);
@@ -206,7 +207,8 @@ var BecomeKing;
     }
     // zeug was an server geschickt wurde anzeigen 
     function sendOrder() {
-        let writeURL = "https://eia2a-aufgabe6.herokuapp.com/?";
+        //let writeURL = "https://eia2a-aufgabe6.herokuapp.com/?";
+        let writeURL = "https://127.0.0.1:80";
         let inputAll = document.getElementsByTagName("input");
         for (let input of inputAll) {
             if (input.checked == true) {
