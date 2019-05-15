@@ -21,9 +21,9 @@ var BecomeKing;
         _response.setHeader("content-type", "text/html; charset=utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
         let url = Url.parse(_request.url, true);
-        _response.write("<h4>Wir konnten folgende Bestellung></h4>");
-        let response = "";
+        _response.write("<h4>Wir konnten folgende Bestellung</h4>");
         for (let key in url.query) {
+            let response = "";
             response += key + ": " + url.query[key];
             _response.write("<p>" + response + "</p>");
         }

@@ -24,11 +24,10 @@ namespace BecomeKing {
 		_response.setHeader("Access-Control-Allow-Origin", "*");
 
 		let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true);
-		_response.write("<h4>Wir konnten folgende Bestellung></h4>");
-
-		let response: string = "";
+		_response.write("<h4>Wir konnten folgende Bestellung</h4>");
 
 		for (let key in url.query) {
+			let response: string = "";
 			response += key + ": " + url.query[key];
 			_response.write("<p>" + response + "</p>");
 		}

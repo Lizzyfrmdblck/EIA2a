@@ -266,14 +266,14 @@ namespace BecomeKing {
         for (let input of inputAll) {
 
             if (input.type == "radio" && input.checked == true) {
-                url += `${input.key}=${input.value}&`;
+                url += `${input.getAttribute("key")}=${input.value}&`;
             }
             if (input.type == "checkbox" && input.checked == true) {
-                url += `${input.key}=${input.name}&`;
+                url += `${input.getAttribute("key")}=${input.name}&`;
             }
 
             if (input.type == "number" && parseFloat(input.value) > 0) {
-                url += `${input.key}=${input.value}x${input.name}&`;
+                url += `${input.getAttribute("key")}=${input.value}x${input.name}&`;
             }
 
             if (input.type == "text") {
