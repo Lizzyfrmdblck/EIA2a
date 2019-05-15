@@ -116,10 +116,6 @@ var BecomeKing;
     }
     // Warenkorb wird geschrieben________________________________________________________________________________
     function writeBasket() {
-        if (testAdresse == true && testBestellung == true) {
-            console.log("add Send Event");
-            document.getElementById("submitButton").addEventListener("click", sendOrder);
-        }
         let basketFs = document.getElementById("basketFs");
         let basketDiv = document.getElementById("basketDiv");
         let inputs = document.getElementsByTagName("input");
@@ -173,6 +169,10 @@ var BecomeKing;
             adressString += "\n" + "Deine Lieferadresse:" + "\n";
             adressString += adressInputs[0].value + ", " + adressInputs[1].value + "\n" + adressInputs[2].value + "\n" + adressInputs[3].value + "  " + adressInputs[4].value + "\n" + adressInputs[5].value;
             testAdresse = true;
+            if (testAdresse == true && testBestellung == true) {
+                console.log("add Send Event");
+                document.getElementById("submitButton").addEventListener("click", sendOrder);
+            }
         }
         else {
             adressString += "Daten sind falsch || unvollständig";
@@ -204,6 +204,10 @@ var BecomeKing;
         }
         if (checkInput == 5) {
             testBestellung = true;
+            if (testAdresse == true && testBestellung == true) {
+                console.log("add Send Event");
+                document.getElementById("submitButton").addEventListener("click", sendOrder);
+            }
         }
     }
     // zeug was an server geschickt wurde anzeigen 

@@ -3,7 +3,7 @@ namespace BecomeKing {
 
     let address: string = "https://eia2a-aufgabe6.herokuapp.com";
     let url: string = "";
-//Test
+    //Test
     window.addEventListener("load", init);
 
     let testAdresse: boolean = false;
@@ -15,7 +15,7 @@ namespace BecomeKing {
         createFormular();
 
         let fieldsets: HTMLCollectionOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
-        document.getElementById("checkButton").addEventListener("click", checkInput);    
+        document.getElementById("checkButton").addEventListener("click", checkInput);
         console.log("addTestEvent");
 
         // für jedes fieldset in der node list event listener hinzufügen
@@ -67,7 +67,7 @@ namespace BecomeKing {
                     case ("Extras"):
                         input.setAttribute("type", "checkbox");
                         input.setAttribute("name", productList[i].name);
-                      //  input.setAttribute("value", productList[i].price + "");
+                        //  input.setAttribute("value", productList[i].price + "");
 
                         break;
                     case ("Fruchteis"):
@@ -132,12 +132,6 @@ namespace BecomeKing {
 
     // Warenkorb wird geschrieben________________________________________________________________________________
     function writeBasket(): void {
-
-        if (testAdresse == true && testBestellung == true) {
-            console.log("add Send Event");
-
-            document.getElementById("submitButton").addEventListener("click", sendOrder);
-        }
 
         let basketFs: HTMLFieldSetElement = <HTMLFieldSetElement>document.getElementById("basketFs");
         let basketDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("basketDiv");
@@ -205,6 +199,12 @@ namespace BecomeKing {
             adressString += "\n" + "Deine Lieferadresse:" + "\n";
             adressString += adressInputs[0].value + ", " + adressInputs[1].value + "\n" + adressInputs[2].value + "\n" + adressInputs[3].value + "  " + adressInputs[4].value + "\n" + adressInputs[5].value;
             testAdresse = true;
+
+            if (testAdresse == true && testBestellung == true) {
+                console.log("add Send Event");
+
+                document.getElementById("submitButton").addEventListener("click", sendOrder);
+            }
         }
 
         else {
@@ -244,6 +244,12 @@ namespace BecomeKing {
 
         if (checkInput == 5) {
             testBestellung = true;
+
+            if (testAdresse == true && testBestellung == true) {
+                console.log("add Send Event");
+
+                document.getElementById("submitButton").addEventListener("click", sendOrder);
+            }
         }
     }
 
@@ -252,7 +258,7 @@ namespace BecomeKing {
     function sendOrder(): void {
         console.log("fire Request");
 
-         let writeURL: string = "https://eia2a-aufgabe6.herokuapp.com/?";
+        let writeURL: string = "https://eia2a-aufgabe6.herokuapp.com/?";
 
         let inputAll: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input")
         for (let input of inputAll) {
@@ -276,7 +282,7 @@ namespace BecomeKing {
         }
 
         sendRequestWithCustomData(url);
-    }   
+    }
 
     function sendRequestWithCustomData(url: string): void {
         let xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -284,9 +290,9 @@ namespace BecomeKing {
         xhr.addEventListener("readystatechange", handleStateChange);
         xhr.send();
 
-    
+
     }
-    
+
     function handleStateChange(_event: ProgressEvent): void {
         let xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
