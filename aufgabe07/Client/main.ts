@@ -1,8 +1,7 @@
 namespace BecomeKing {
 
 
-    //let address: string = "https://eia2a-aufgabe6.herokuapp.com";
-    let address: string = "https://localhost";
+    let address: string = "https://eia2a-aufgabe6.herokuapp.com";
     let url: string = "";
 //Test
     window.addEventListener("load", init);
