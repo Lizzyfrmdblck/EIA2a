@@ -275,13 +275,15 @@ namespace BecomeKing {
         sendRequestWithCustomData(url);
     }   
 
-
     function sendRequestWithCustomData(url: string): void {
         let xhr: XMLHttpRequest = new XMLHttpRequest();
         xhr.open("GET", url, true);
         xhr.addEventListener("readystatechange", handleStateChange);
         xhr.send();
+
+    
     }
+    
     function handleStateChange(_event: ProgressEvent): void {
         let xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
