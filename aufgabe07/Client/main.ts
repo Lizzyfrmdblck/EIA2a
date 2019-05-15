@@ -1,8 +1,10 @@
+
+
 namespace BecomeKing {
 
 
     let address: string = "https://eia2a-aufgabe6.herokuapp.com";
-    let url: string = "";
+
     //Test
     window.addEventListener("load", init);
 
@@ -258,35 +260,35 @@ namespace BecomeKing {
     function sendOrder(): void {
         console.log("fire Request");
 
-        let writeURL: string = "https://eia2a-aufgabe6.herokuapp.com/?";
+        let url: string = "https://eia2a-aufgabe6.herokuapp.com/?";
 
         let inputAll: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input")
         for (let input of inputAll) {
 
             if (input.checked == true) {
-                writeURL += `${input.name}=${input.value}&`;
+                url += `${input.name}=${input.value}&`;
             }
             if (input.type == "checkbox") {
-                writeURL += `${input.getAttribute("key")}=${input.name}&`;
+                url += `${input.getAttribute("key")}=${input.name}&`;
             }
 
             console.log(input.basket);
             if (input.type == "number" && input.basket === "true") {
-                writeURL += `${input.name}=${input.price}&`;
+                url += `${input.name}=${input.price}&`;
             }
 
             if (input.type == "text") {
-                writeURL += `${input.name}=${input.value}&`;
+                url += `${input.name}=${input.value}&`;
             }
 
         }
 
-        sendRequestWithCustomData(writeURL);
+        sendRequestWithCustomData(url);
     }
 
-    function sendRequestWithCustomData(url: string): void {
+    function sendRequestWithCustomData(_url: string): void {
         let xhr: XMLHttpRequest = new XMLHttpRequest();
-        xhr.open("GET", url, true);
+        xhr.open("GET", _url, true);
         xhr.addEventListener("readystatechange", handleStateChange);
         xhr.send();
 

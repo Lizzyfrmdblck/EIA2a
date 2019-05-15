@@ -18,18 +18,21 @@ namespace BecomeKing {
 
 	function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
 		console.log("I hear voices!");
+		console.log(_request.url);
 
 		_response.setHeader("content-type", "text/html; charset=utf-8");
 		_response.setHeader("Access-Control-Allow-Origin", "*");
 
-		_response.write("<h4>Wir konnten folgende Bestellung></h4>");
 		let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true);
-		for (let key in url.query) {
-			_response.write("<p>" + key + url.query[key] + "</p>");
+		_response.write("<h4>Wir konnten folgende Bestellung></h4>");
 
-			console.log(_request.url);
-			_response.end();
+		let response: string = "";
+
+		for (let key in url.query) {
+			response += key + ": " + url.query[key];
+			_response.write("<p>" + response + "</p>");
 		}
+		_response.end();
 	}
-}
+}//namespace ende
 
