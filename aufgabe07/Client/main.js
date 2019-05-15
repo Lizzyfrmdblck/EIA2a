@@ -1,7 +1,6 @@
 var BecomeKing;
 (function (BecomeKing) {
-    //let address = "https://eia2a-aufgabe6.herokuapp.com";
-    let address = "https://127.0.0.1:80";
+    let address = "https://eia2a-aufgabe6.herokuapp.com";
     let url = "";
     //Test
     window.addEventListener("load", init);
@@ -10,8 +9,6 @@ var BecomeKing;
     let inputs = document.getElementsByTagName("input");
     function init() {
         createFormular();
-        //   document.getElementById("submitButton").addEventListener("click", checkInput);
-        document.getElementById("submitButton").addEventListener("click", sendOrder);
         let fieldsets = document.getElementsByTagName("fieldset");
         // für jedes fieldset in der node list event listener hinzufügen
         for (let i = 0; i < fieldsets.length; i++) {
@@ -207,8 +204,7 @@ var BecomeKing;
     }
     // zeug was an server geschickt wurde anzeigen 
     function sendOrder() {
-        //let writeURL = "https://eia2a-aufgabe6.herokuapp.com/?";
-        let writeURL = "https://127.0.0.1:80";
+        let writeURL = "https://eia2a-aufgabe6.herokuapp.com/?";
         let inputAll = document.getElementsByTagName("input");
         for (let input of inputAll) {
             if (input.checked == true) {

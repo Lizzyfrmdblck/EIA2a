@@ -204,8 +204,7 @@ var eisdealer_client;
     }
     // zeug was an server geschickt wurde anzeigen 
     function sendOrder() {
-        //let writeURL = "https://eia2a-aufgabe6.herokuapp.com/?";
-        let writeURL = "127.0.0.1:8100";
+        let writeURL = "https://eia2a-aufgabe6.herokuapp.com/?";
         let inputAll = document.getElementsByTagName("input");
         for (let input of inputAll) {
             /*    if (input.checked == true) {
