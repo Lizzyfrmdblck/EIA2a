@@ -1,7 +1,14 @@
-
+/*  
+Aufgabe 7: Ice Dealer ReReLoaded
+Name: Elyssia-Sofie Dürr
+Matrikel: 254764
+Datum: 12.05.2019
+    
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
+Er wurde nicht kopiert und auch nicht diktiert. 
+*/
 
 namespace BecomeKing {
-
 
     let address: string = "https://eia2a-aufgabe6.herokuapp.com";
 
@@ -64,13 +71,11 @@ namespace BecomeKing {
                         input.setAttribute("type", "radio");
                         input.setAttribute("name", "radioGroup_" + key);
                         input.setAttribute("value", productList[i].name);
-
                         break;
                     case ("Extras"):
                         input.setAttribute("type", "checkbox");
                         input.setAttribute("name", productList[i].name);
                         //  input.setAttribute("value", productList[i].price + "");
-
                         break;
                     case ("Fruchteis"):
                     case ("Milcheis"):
@@ -82,7 +87,6 @@ namespace BecomeKing {
                         break;
                     default: break;
                 }
-
                 label.setAttribute("for", input.id); //Du Label gehörst jetzt zu dem Input Element
                 label.innerText = productList[i].name;
                 // Elter ruft Kind  
@@ -100,7 +104,6 @@ namespace BecomeKing {
         //Nodelist von allen Input Elementen
         let inputs: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input");
 
-
         //Fallunterscheidung: Wenn das target ein radio ist 
         if (target.type == "radio") {
             for (let i: number = 0; i < inputs.length; i++) {
@@ -111,21 +114,17 @@ namespace BecomeKing {
             target.setAttribute("basket", "true");
             writeBasket(); //nach jeder Veränderung, Neu Auswählung wird Warenkorb neu geschrieben
         }
-
         else if (target.type == "checkbox") {
             if (target.checked == true) { target.setAttribute("basket", "true"); }
             else { target.setAttribute("basket", "false"); }
             writeBasket();
         }
-
         else if (target.type == "number") {
             if (target.value == "0") { target.setAttribute("basket", "false"); }
             else { target.setAttribute("basket", "true"); }
             writeBasket();
         }
-
-        //"text"
-        else {
+        else { //"text"
             if (target.checkValidity() == false) { target.setAttribute("write", "false"); } //checkt Pattern
             else { target.setAttribute("write", "true"); }
             writeAdress();
@@ -157,7 +156,6 @@ namespace BecomeKing {
                         basketElement.innerText = "- " + inputs[i].value + "x " + inputs[i].getAttribute("product") + " " + pPrice.toFixed(2).toString() + " €";
                         basketElement.setAttribute("pPrice", pPrice.toFixed(2).toString());
                     }
-
                     else {
                         basketElement.innerText = "- " + inputs[i].getAttribute("product") + " " + singlePrice.toFixed(2).toString() + " €";
                         basketElement.setAttribute("pPrice", singlePrice.toFixed(2).toString());
@@ -165,7 +163,6 @@ namespace BecomeKing {
                     basketDiv.appendChild(basketElement);
                 }
             }
-
         }
 
         let priceDiv: HTMLDivElement = <HTMLDivElement>document.getElementById("priceDiv");
@@ -196,23 +193,18 @@ namespace BecomeKing {
         for (let i: number = 0; i < adressInputs.length; i++) {
             if (adressInputs[i].getAttribute("write") == "true") { check++; }
         }
-
         if (check == 6) {
             adressString += "\n" + "Deine Lieferadresse:" + "\n";
             adressString += adressInputs[0].value + ", " + adressInputs[1].value + "\n" + adressInputs[2].value + "\n" + adressInputs[3].value + "  " + adressInputs[4].value + "\n" + adressInputs[5].value;
             testAdresse = true;
-
             if (testAdresse == true && testBestellung == true) {
                 console.log("add Send Event");
-
                 document.getElementById("submitButton").addEventListener("click", sendOrder);
             }
         }
-
         else {
             adressString += "Daten sind falsch || unvollständig";
         }
-
         adressP.innerText = adressString;
         adressDiv.appendChild(adressP); //Anzeige
     }
@@ -232,7 +224,6 @@ namespace BecomeKing {
             let attribute: string = basketPs[i].getAttribute("key");
             checkArray.push(attribute);
         }
-
         for (let key in products) {
             if (checkArray.indexOf(key) == -1) {
                 let p: HTMLParagraphElement = document.createElement("p");
@@ -243,13 +234,11 @@ namespace BecomeKing {
                 checkInput++;
             }
         }
-
         if (checkInput == 5) {
             testBestellung = true;
 
             if (testAdresse == true && testBestellung == true) {
-                console.log("add Send Event");
-
+                console.log("add SendEvent");
                 document.getElementById("submitButton").addEventListener("click", sendOrder);
             }
         }
@@ -258,7 +247,7 @@ namespace BecomeKing {
 
     // zeug was an server geschickt wurde anzeigen 
     function sendOrder(): void {
-        console.log("fire Request");
+        console.log("fire request");
 
         let url: string = "https://eia2a-aufgabe6.herokuapp.com/?";
 
@@ -268,30 +257,16 @@ namespace BecomeKing {
             if (input.type == "radio" && input.checked == true) {
                 url += `${input.getAttribute("key")}=${input.value}&`;
             }
-            if (input.type == "checkbox" && input.checked == true) {
+            else if (input.type == "checkbox" && input.checked == true) {
                 url += `${input.getAttribute("key")}=${input.name}&`;
             }
-
-            if (input.type == "number" && parseFloat(input.value) > 0) {
+            else if (input.type == "number" && parseFloat(input.value) > 0) {
                 url += `${input.getAttribute("key")}=${input.value}x${input.name}&`;
             }
-
-            if (input.type == "text") {
+            else {
                 url += `${input.id}=${input.value}&`;
             }
-
         }
-        //https://eia2a-aufgabe6.herokuapp.com/?
-        //radioGroup_Behaelter=Waffel&
-        //Sahne=on&
-        //Extras=Sahne&Extras=Smarties&Extras=Chocosauce&Extras=Erdbeersauce&Extras=Kokosraspeln&Extras=kleine%20Oreos&Extras=kleine%20Cookies&Extras=bunte%20Streusel
-        //&radioGroup_Lieferung=Express
-        //&first-name=Max
-        //&last-name=Mustermann
-        //&street=Musterstrase%203
-        //&city=Musterstadt
-        //&postal-code=72227
-        //&country=de&
         sendRequestWithCustomData(url);
     }
 
@@ -300,8 +275,6 @@ namespace BecomeKing {
         xhr.open("GET", _url, true);
         xhr.addEventListener("readystatechange", handleStateChange);
         xhr.send();
-
-
     }
 
     function handleStateChange(_event: ProgressEvent): void {
@@ -310,4 +283,4 @@ namespace BecomeKing {
             document.getElementById("submitÜbersicht").innerHTML = xhr.response;
         }
     }
-}
+}//namespace zu

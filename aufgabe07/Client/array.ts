@@ -1,3 +1,13 @@
+/*  
+Aufgabe 7: Ice Dealer ReReLoaded
+Name: Elyssia-Sofie Dürr
+Matrikel: 254764
+Datum: 12.05.2019
+    
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. 
+Er wurde nicht kopiert und auch nicht diktiert. 
+*/
+
 namespace BecomeKing {
 
     export interface Product {

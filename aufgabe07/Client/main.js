@@ -1,3 +1,12 @@
+/*
+Aufgabe 7: Ice Dealer ReReLoaded
+Name: Elyssia-Sofie Dürr
+Matrikel: 254764
+Datum: 12.05.2019
+    
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe.
+Er wurde nicht kopiert und auch nicht diktiert.
+*/
 var BecomeKing;
 (function (BecomeKing) {
     let address = "https://eia2a-aufgabe6.herokuapp.com";
@@ -102,8 +111,7 @@ var BecomeKing;
             }
             writeBasket();
         }
-        //"text"
-        else {
+        else { //"text"
             if (target.checkValidity() == false) {
                 target.setAttribute("write", "false");
             } //checkt Pattern
@@ -204,41 +212,30 @@ var BecomeKing;
         if (checkInput == 5) {
             testBestellung = true;
             if (testAdresse == true && testBestellung == true) {
-                console.log("add Send Event");
+                console.log("add SendEvent");
                 document.getElementById("submitButton").addEventListener("click", sendOrder);
             }
         }
     }
     // zeug was an server geschickt wurde anzeigen 
     function sendOrder() {
-        console.log("fire Request");
+        console.log("fire request");
         let url = "https://eia2a-aufgabe6.herokuapp.com/?";
         let inputAll = document.getElementsByTagName("input");
         for (let input of inputAll) {
             if (input.type == "radio" && input.checked == true) {
                 url += `${input.getAttribute("key")}=${input.value}&`;
             }
-            if (input.type == "checkbox" && input.checked == true) {
+            else if (input.type == "checkbox" && input.checked == true) {
                 url += `${input.getAttribute("key")}=${input.name}&`;
             }
-            if (input.type == "number" && parseFloat(input.value) > 0) {
+            else if (input.type == "number" && parseFloat(input.value) > 0) {
                 url += `${input.getAttribute("key")}=${input.value}x${input.name}&`;
             }
-            if (input.type == "text") {
+            else {
                 url += `${input.id}=${input.value}&`;
             }
         }
-        //https://eia2a-aufgabe6.herokuapp.com/?
-        //radioGroup_Behaelter=Waffel&
-        //Sahne=on&
-        //Extras=Sahne&Extras=Smarties&Extras=Chocosauce&Extras=Erdbeersauce&Extras=Kokosraspeln&Extras=kleine%20Oreos&Extras=kleine%20Cookies&Extras=bunte%20Streusel
-        //&radioGroup_Lieferung=Express
-        //&first-name=Max
-        //&last-name=Mustermann
-        //&street=Musterstrase%203
-        //&city=Musterstadt
-        //&postal-code=72227
-        //&country=de&
         sendRequestWithCustomData(url);
     }
     function sendRequestWithCustomData(_url) {
@@ -253,5 +250,5 @@ var BecomeKing;
             document.getElementById("submitÜbersicht").innerHTML = xhr.response;
         }
     }
-})(BecomeKing || (BecomeKing = {}));
+})(BecomeKing || (BecomeKing = {})); //namespace zu
 //# sourceMappingURL=main.js.map
