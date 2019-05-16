@@ -275,7 +275,7 @@ namespace BecomeKing {
             }
         }
 
-        //Hauptfehler 1 >> falsche variable übergeben
+        //Hauptfehler 1 : falsche variable übergeben
         sendRequestWithCustomData(url);
     }
 
