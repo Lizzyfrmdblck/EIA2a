@@ -240,7 +240,7 @@ var BecomeKing;
                 url += `${input.id}=${input.value}&`;
             }
         }
-        //Hauptfehler 1 >> falsche variable übergeben
+        //Hauptfehler 1 :1 falsche variable übergeben
         sendRequestWithCustomData(url);
     }
     function sendRequestWithCustomData(_url) {
