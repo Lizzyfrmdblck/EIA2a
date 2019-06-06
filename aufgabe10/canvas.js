@@ -1,106 +1,136 @@
 var A9;
 (function (A9) {
     window.addEventListener("load", init);
-    let crc2;
+    let ctx;
+    // init
     function init(_event) {
         console.log("Canvas started");
         let canvas = document.getElementsByTagName("canvas")[0];
-        crc2 = canvas.getContext("2d");
-        console.log(crc2);
-        //Wasser
-        let colorGradient = crc2.createLinearGradient(100, 50, 100, 30);
-        colorGradient.addColorStop(0, "#58ACFA");
-        colorGradient.addColorStop(1, "#58D3F7");
-        crc2.fillStyle = colorGradient;
-        crc2.fillRect(0, 0, canvas.width, canvas.height);
-        //Funktionsaufruf Sand
-        drawGround(0, 300, "#000000", "#ffffff");
-        drawSchatzkiste(0, 0, "#FFFFFF");
-        //Blubberblasen        
-        for (let i = 0; i < 8; i++) {
+        ctx = canvas.getContext("2d");
+        console.log(ctx);
+        //FUNKTIONSAUFRUFE_________________________________________________________________
+        // Wasser
+        drawWater();
+        // Fische
+        for (let i = 0; i < 2; i++) {
             let x = Math.random() * canvas.width;
-            let y = Math.random() * canvas.height;
-            drawBubble(x, y, 6, "", "#ffffff");
+            let y = Math.floor((Math.random() * 300) + 50);
+            drawFish1(x, y);
         }
-        //Fische
-        function drawFish(_x, _y, _strokeColor, _fillColor, _rotation) {
-            //Körper 
-            crc2.strokeStyle = "#FE9A2E";
-            crc2.lineWidth = 6;
-            crc2.beginPath();
-            crc2.moveTo(_x + 0, _y + 16);
-            crc2.lineTo(_x + 35, _y + 25); //unten
-            crc2.lineTo(_x + 35, _y + 10); //unten
-            crc2.stroke();
-            crc2.stroke();
-            //Flossen 
-            crc2.beginPath();
-            crc2.fillStyle = "#C4A377";
-            crc2.arc(_x + 6, _y + 7, 7, 0, 2 * Math.PI);
-            crc2.closePath();
-            crc2.fill();
+        for (let i = 0; i < 2; i++) {
+            let x = Math.floor((Math.random() * 400) + 30);
+            let y = Math.floor((Math.random() * 300) + 50);
+            drawFish2(x, y);
         }
-        //Sand Funktion
-        function drawGround(_x, _y, _strokeColor, _fillColor) {
-            crc2.beginPath();
-            crc2.fillStyle = _fillColor;
-            crc2.beginPath();
-            crc2.moveTo(0, 250);
-            crc2.quadraticCurveTo(30, 220, 80, 250);
-            crc2.quadraticCurveTo(212, 400, 600, 400);
-            // crc2.quadraticCurveTo(100, 300, 414, 250);
-            crc2.lineTo(414, 736);
-            crc2.lineTo(0, 736);
-            crc2.closePath();
-            crc2.fill();
+        // Alge
+        for (let i = 0; i < 200; i++) {
+            let x = Math.floor((Math.random() * 400) + 0);
+            let y = Math.floor((Math.random() * 200) + 450);
+            drawAlge(x, y);
         }
-        function drawAlge(_x, _y, _w, _h, _fill1, _fill2) {
-            crc2.beginPath();
-            crc2.moveTo(_x, _y - 40);
-            crc2.lineTo(_x - 10, _y);
-            crc2.lineTo(_x + 10, _y);
-            crc2.lineTo(_x + 10, _y);
-            crc2.closePath();
-            crc2.fillStyle = "#FAC53D";
-            crc2.strokeStyle = "#FAC53D";
-            crc2.fill();
-            crc2.stroke();
+        // Luftblasen
+        for (let i = 0; i < 25; i++) {
+            let randX = (Math.random() * (414) + 0);
+            let randY = (Math.random() * (500) + 0);
+            drawBubbles(randX, randY);
         }
-        function drawCloud(_x, _y, _c) {
-            crc2.beginPath();
-            crc2.arc(170, 90, 20, 0, 2 * Math.PI);
-            crc2.arc(150, 95, 20, 0, 2 * Math.PI);
-            crc2.arc(130, 70, 20, 0, 2 * Math.PI);
-            crc2.arc(150, 55, 20, 0, 2 * Math.PI);
-            crc2.arc(130, 70, 20, 0, 2 * Math.PI);
-            crc2.arc(110, 90, 20, 0, 2 * Math.PI);
-            crc2.arc(125, 70, 20, 0, 2 * Math.PI);
-            crc2.arc(175, 70, 20, 0, 2 * Math.PI);
-            crc2.arc(200, 90, 20, 0, 2 * Math.PI);
-            crc2.arc(140, 90, 20, 0, 2 * Math.PI);
-            crc2.fillStyle = "#FFFFFF";
-            crc2.strokeStyle = "#FFFFFF";
-            crc2.fill();
-            crc2.stroke();
+        //Statische Objekte__________________________________________________________________
+        //Funktion Wasser
+        function drawWater() {
+            var gradient;
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(0.7, 0.7);
+            ctx.lineTo(414.7, 0.7);
+            ctx.lineTo(414.7, 734.3);
+            ctx.lineTo(0.7, 734.3);
+            ctx.lineTo(0.7, 0.7);
+            ctx.closePath();
+            gradient = ctx.createLinearGradient(207.7, 0.7, 207.7, 734.3);
+            gradient.addColorStop(0.00, "rgb(42, 170, 225)");
+            gradient.addColorStop(1.00, "rgb(16, 113, 185)");
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            ctx.lineWidth = 1.4;
+            ctx.strokeStyle = "rgb(1, 1, 1)";
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(2.2, 548.0);
+            ctx.bezierCurveTo(2.2, 548.0, 219.2, 489.7, 413.2, 548.0);
+            ctx.lineTo(413.2, 733.3);
+            ctx.lineTo(2.2, 733.3);
+            ctx.fillStyle = "rgb(229, 202, 144)";
+            ctx.fill();
+            ctx.restore();
         }
-        //Blubberblase
-        function drawBubble(_x, _y, _size, _strokeColor, _fillColor) {
-            crc2.beginPath();
-            crc2.fillStyle = _fillColor;
-            crc2.arc(_x, _y, _size, 0, 5 * Math.PI);
-            crc2.closePath();
-            //crc2.stroke();
-            crc2.fill();
-        }
-        //Blubberblase
-        function drawSchatzkiste(_fillColor) {
-            crc2.beginPath();
-            crc2.fillStyle = _fillColor;
-            crc2.fillRect(0, 0, 300, 400);
-            crc2.closePath();
-            //crc2.stroke();
-            crc2.fill();
-        }
+    }
+    // Funktion Fische
+    function drawFish1(_x, _y) {
+        let fishHead = new Path2D();
+        fishHead.ellipse(_x, _y, 40, 40, 1.5, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgb(249, 154, 0)";
+        ctx.fill(fishHead);
+        let fishEye = new Path2D();
+        fishEye.arc(_x + 20, _y - 2, 8, 0, 2 * Math.PI);
+        ctx.fillStyle = "white";
+        ctx.fill(fishEye);
+        let fishEyeIris = new Path2D();
+        fishEyeIris.arc(_x + 20, _y - 2, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = "black";
+        ctx.fill(fishEyeIris);
+        let fishTail = new Path2D();
+        fishTail.moveTo(_x - 32, _y + 2);
+        fishTail.lineTo(_x - 59, _y + 30);
+        fishTail.lineTo(_x - 60, _y - 20);
+        fishTail.closePath();
+        ctx.fillStyle = "rgb(249, 154, 0)";
+        ctx.fill(fishTail);
+    }
+    //Fisch 2
+    function drawFish2(_x, _y) {
+        let fishHead = new Path2D();
+        fishHead.ellipse(_x, _y, 40, 40, 1.5, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgb(211, 2, 124)";
+        ctx.fill(fishHead);
+        let fishEye = new Path2D();
+        fishEye.arc(_x + 20, _y - 2, 8, 0, 2 * Math.PI);
+        ctx.fillStyle = "white";
+        ctx.fill(fishEye);
+        let fishEyeIris = new Path2D();
+        fishEyeIris.arc(_x + 20, _y - 2, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = "black";
+        ctx.fill(fishEyeIris);
+        let fishTail = new Path2D();
+        fishTail.moveTo(_x - 32, _y + 2);
+        fishTail.lineTo(_x - 59, _y + 30);
+        fishTail.lineTo(_x - 60, _y - 20);
+        fishTail.closePath();
+        ctx.fillStyle = "rgb(211, 2, 124)";
+        ctx.fill(fishTail);
+    }
+    //Funktion Alge
+    function drawAlge(_x, _y) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(_x + 2.5, _y + 1.0);
+        ctx.lineTo(_x + 2.3, _y + 0.0);
+        ctx.lineTo(_x + 2.0, _y + 1.0);
+        ctx.lineTo(_x + 0.0, _y + 90.0);
+        ctx.lineTo(_x + 3.5, _y + 90.0);
+        ctx.lineTo(_x + 2.5, _y + 1.0);
+        ctx.closePath();
+        ctx.fillStyle = "rgb(59, 150, 10)";
+        ctx.strokeStyle = "rgb(66, 244, 113)";
+        ctx.stroke();
+        ctx.fill("evenodd");
+        ctx.restore();
+    }
+    //FunktionLuftblasen
+    function drawBubbles(_x, _y) {
+        let bubble = new Path2D();
+        bubble.arc(_x, _y, 10, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(255,255,255,0.7)";
+        ctx.fill(bubble);
     }
 })(A9 || (A9 = {}));
 //# sourceMappingURL=canvas.js.map
