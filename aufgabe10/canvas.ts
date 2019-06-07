@@ -26,7 +26,7 @@ namespace A9 {
       drawFish2(x, y);
     }
     // Alge
-    for (let i: number = 0; i < 200; i++) {
+    for (let i: number = 0; i < 300; i++) {
       let x: number = Math.floor((Math.random() * 400) + 0);
       let y: number = Math.floor((Math.random() * 200) + 450);
       drawAlge(x, y);
