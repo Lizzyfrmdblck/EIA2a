@@ -67,7 +67,7 @@ var A9;
     // Funktion Fische
     function drawFish1(_x, _y) {
         let fishHead = new Path2D();
-        fishHead.ellipse(_x, _y, 40, 40, 1.5, 0, 2 * Math.PI);
+        fishHead.ellipse(_x, _y, 10, 10, 1.5, 0, 2 * Math.PI);
         ctx.fillStyle = "rgb(249, 154, 0)";
         ctx.fill(fishHead);
         let fishEye = new Path2D();
