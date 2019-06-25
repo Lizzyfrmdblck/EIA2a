@@ -130,12 +130,12 @@ var Ice;
                 console.log("Angaben fehlen");
                 //break;    
             }
-            else
-                (proof[i].validity.valid == true);
-            {
+            else if (proof[i].validity.valid == true) {
                 alert("Danke für deine Bestellung.");
                 location.reload();
             }
+            else
+                ;
         }
     }
 })(Ice || (Ice = {}));

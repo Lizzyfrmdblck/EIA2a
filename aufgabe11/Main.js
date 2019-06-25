@@ -10,7 +10,7 @@ var seaworld;
         canvas.width = 414;
         canvas.height = 748;
         seaworld.ctx = canvas.getContext("2d");
-        drawBackground();
+        drawBackground2();
         createBubbles();
         //Hintergrund speichern
         seaworld.getImage = seaworld.ctx.getImageData(0, 0, 414, 748);
@@ -28,8 +28,8 @@ var seaworld;
     //Funktion kreiert 20 Luftblasen, pusht Bubbles in Array 
     function createBubbles() {
         for (let i = 0; i < 20; i++) {
-            let bubbles = new seaworld.Bubbles();
-            bubbles.push(bubbles);
+            let bubble = new seaworld.Bubbles();
+            seaworld.bubbles.push(bubble);
         }
         console.log(seaworld.bubbles);
     }
@@ -39,48 +39,44 @@ var seaworld;
         //        console.log(fishes.length);
         for (let i = 0; i < seaworld.fishes.length; i++) {
             seaworld.fishes[i].move();
-            seaworld.fishes[i].drawFishes();
+            seaworld.fishes[i].drawFish();
         }
         for (let i = 0; i < seaworld.bubbles.length; i++) {
             seaworld.bubbles[i].moveBubble();
             seaworld.bubbles[i].drawBubble();
         }
     }
-    //zeichnet Hintergrund
-    function drawBackground() {
-        for (let i = 0; i < 7; i++) {
-            let randX = (Math.random() * (100) + 0);
-            let randY = (Math.random() * (50) + 250);
+    //Wasser und Sand
+    function drawBackground2() {
+        let gradient;
+        seaworld.ctx.beginPath();
+        seaworld.ctx.moveTo(1, 1);
+        seaworld.ctx.lineTo(414, 1);
+        seaworld.ctx.lineTo(414, 734);
+        seaworld.ctx.lineTo(1, 734);
+        seaworld.ctx.lineTo(1, 1);
+        seaworld.ctx.closePath();
+        gradient = seaworld.ctx.createLinearGradient(207, 1, 207, 734);
+        gradient.addColorStop(0.00, "rgb(42, 170, 225)");
+        gradient.addColorStop(1.00, "rgb(16, 113, 185)");
+        seaworld.ctx.fillStyle = gradient;
+        seaworld.ctx.fill();
+        seaworld.ctx.lineWidth = 1.4;
+        seaworld.ctx.strokeStyle = "rgb(1, 1, 1)";
+        seaworld.ctx.stroke();
+        seaworld.ctx.beginPath();
+        seaworld.ctx.moveTo(2.2, 548.0);
+        seaworld.ctx.bezierCurveTo(2, 548, 219, 489, 413, 548);
+        seaworld.ctx.lineTo(413, 733);
+        seaworld.ctx.lineTo(2, 733);
+        seaworld.ctx.fillStyle = "rgb(229, 202, 144)";
+        seaworld.ctx.fill();
+        seaworld.ctx.restore();
+        for (let i = 0; i < 150; i++) {
+            let randX = (Math.random() * (400) + 0);
+            let randY = (Math.random() * (120) + 500);
             //zeichnet Algen im vorgegebenen Raum
             drawAlga(randX, randY, 10, 20, "#676765", "#676765");
-        }
-        //Wasser und Sand
-        function drawBackground(_x, _y, _strokeColor, _fillColor) {
-            var gradient;
-            seaworld.ctx.save();
-            seaworld.ctx.beginPath();
-            seaworld.ctx.moveTo(0.7, 0.7);
-            seaworld.ctx.lineTo(414.7, 0.7);
-            seaworld.ctx.lineTo(414.7, 734.3);
-            seaworld.ctx.lineTo(0.7, 734.3);
-            seaworld.ctx.lineTo(0.7, 0.7);
-            seaworld.ctx.closePath();
-            gradient = seaworld.ctx.createLinearGradient(207, 1, 207, 734);
-            gradient.addColorStop(0.00, "rgb(42, 170, 225)");
-            gradient.addColorStop(1.00, "rgb(16, 113, 185)");
-            seaworld.ctx.fillStyle = gradient;
-            seaworld.ctx.fill();
-            seaworld.ctx.lineWidth = 1.4;
-            seaworld.ctx.strokeStyle = "rgb(1, 1, 1)";
-            seaworld.ctx.stroke();
-            seaworld.ctx.beginPath();
-            seaworld.ctx.moveTo(2.2, 548.0);
-            seaworld.ctx.bezierCurveTo(2, 548, 219, 489, 413, 548);
-            seaworld.ctx.lineTo(413, 733);
-            seaworld.ctx.lineTo(2, 733);
-            seaworld.ctx.fillStyle = "rgb(229, 202, 144)";
-            seaworld.ctx.fill();
-            seaworld.ctx.restore();
         }
     }
     //Funktion Alge

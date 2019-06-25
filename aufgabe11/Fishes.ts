@@ -6,114 +6,69 @@ namespace seaworld {
         rightside: boolean;
         x: number;
         y: number;
+        dx: number;
+        
         constructor() {
-            this.fillColor = "#DEB887";
+            this.fillColor = "rgba(255,255,255,0.7)";
             this.strokeColor = "#ffff00";
             this.rotation = 15;
             this.rightside = true;
-            this.x = (Math.random() * (100) + 0);
-            this.y = (Math.random() * (100) + 275);
-          
-
-            this.drawFishes();
+            this.x = (Math.random() * 370 + 10);
+            this.y = (Math.random() * 700 + 10);
+            this.dx = (Math.random() * 6 + 1);
+            this.drawFish();
         }
 
 
         //Funktion, dass die Fische nach rechts oder links schwimmen
-        drawFishes(): void {
-            if (this.rightside == true) {
-                this.drawFishRight();
-            }
-            if (this.rightside == false) {
-                this.drawFishLeft();
-            }
+        drawFish(): void {
+            let fishHead: Path2D = new Path2D();
+            fishHead.ellipse(this.x, this.y, 40, 40, 1.5, 0, 2 * Math.PI);
+            ctx.fillStyle = "rgb(211, 2, 124)";
+            ctx.fill(fishHead);
+
+            let fishEye: Path2D = new Path2D();
+            fishEye.arc(this.x + 20, this.y - 2, 8, 0, 2 * Math.PI);
+            ctx.fillStyle = "white";
+            ctx.fill(fishEye);
+
+
+            let fishEyeIris: Path2D = new Path2D();
+            fishEyeIris.arc(this.x + 20, this.y - 2, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = "black";
+            ctx.fill(fishEyeIris);
+
+            let fishTail: Path2D = new Path2D();
+            fishTail.moveTo(this.x - 32, this.y + 2);
+            fishTail.lineTo(this.x - 59, this.y + 30);
+            fishTail.lineTo(this.x - 60, this.y - 20);
+            fishTail.closePath();
+
+            ctx.fillStyle = "rgb(211, 2, 124)";
+            ctx.fill(fishTail);
 
 
 
-        }
-        drawFishRight(): void {
-            function drawFish2(_x: number, _y: number) {
-                let fishHead = new Path2D();
-                fishHead.ellipse(_x, _y, 40, 40, 1.5, 0, 2 * Math.PI);
-                ctx.fillStyle = "rgb(211, 2, 124)";
-                ctx.fill(fishHead);
-            
-                let fishEye: Path2D = new Path2D();
-                fishEye.arc(_x + 20, _y - 2, 8, 0, 2 * Math.PI);
-                ctx.fillStyle = "white";
-                ctx.fill(fishEye);
-            
-            
-                let fishEyeIris: Path2D = new Path2D();
-                fishEyeIris.arc(_x + 20, _y - 2, 5, 0, 2 * Math.PI);
-                ctx.fillStyle = "black";
-                ctx.fill(fishEyeIris);
-            
-                let fishTail = new Path2D();
-                fishTail.moveTo(_x - 32, _y + 2);
-                fishTail.lineTo(_x - 59, _y + 30);
-                fishTail.lineTo(_x - 60, _y - 20);
-                fishTail.closePath();
-            
-                ctx.fillStyle = "rgb(211, 2, 124)";
-                ctx.fill(fishTail);
-            
-              }
 
         }
 
-
-        //Fisch nach links schwimmend
-        drawFishLeft(): void {
-
-            function drawFish2(_x: number, _y: number) {
-                let fishHead = new Path2D();
-                fishHead.ellipse(_x, _y, 40, 40, 1.5, 0, 2 * Math.PI);
-                ctx.fillStyle = "rgb(211, 2, 124)";
-                ctx.fill(fishHead);
-            
-                let fishEye: Path2D = new Path2D();
-                fishEye.arc(_x + 20, _y - 2, 8, 0, 2 * Math.PI);
-                ctx.fillStyle = "white";
-                ctx.fill(fishEye);
-            
-            
-                let fishEyeIris: Path2D = new Path2D();
-                fishEyeIris.arc(_x + 20, _y - 2, 5, 0, 2 * Math.PI);
-                ctx.fillStyle = "black";
-                ctx.fill(fishEyeIris);
-            
-                let fishTail = new Path2D();
-                fishTail.moveTo(_x - 32, _y + 2);
-                fishTail.lineTo(_x - 59, _y + 30);
-                fishTail.lineTo(_x - 60, _y - 20);
-                fishTail.closePath();
-            
-                ctx.fillStyle = "rgb(211, 2, 124)";
-                ctx.fill(fishTail);
-            
-              }
-
-        }
-
-        //Funktion, damit Fische den Bildschirm nicht verlassen
         move(): void {
-            if (this.y >= 450) {
-                this.rightside = false;
+            this.x += this.dx;
+            if (this.x > ctx.canvas.width) {
+                this.x = -40;
+                this.y = Math.random() * 670 + 10;
             }
-            if (this.y <= 300) {
-                this.rightside = true;
-            }
-            if (this.rightside == true) {
-                this.x += 4;
-                this.y += 2;
-            }
-            if (this.rightside == false) {
-                this.x -= 4;
-                this.y -= 2;
-            }
-//            this.drawFishes();
+            
+            
+            this.drawFish();
+
+
         }
+
 
     }
+
+
+
+
 }
