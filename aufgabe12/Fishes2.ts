@@ -1,5 +1,5 @@
 namespace seaworld {
-    export class Fishes {
+    export class Fishes2 {
         fillColor: string;
         strokeColor: string;
         rotation: number;

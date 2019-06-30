@@ -1,4 +1,4 @@
-namespace seaworld {
+namespace foodporn {
     window.addEventListener("load", init);
     export let ctx: CanvasRenderingContext2D;
     export let fishes: Fishes[] = [];
@@ -16,7 +16,9 @@ namespace seaworld {
         canvas.height = 748;
         ctx = canvas.getContext("2d");
         drawBackground2();
-        createBubbles();
+        createBubbles();#
+        //EventListener
+        canvas.addEventListener("click", clickFeed);
         //Hintergrund speichern
         getImage = ctx.getImageData(0, 0, 414, 748);
         createFishes();
@@ -130,6 +132,23 @@ namespace seaworld {
         ctx.stroke();
         ctx.fill("evenodd");
         ctx.restore();
+    }
+
+    //Food
+    function clickFeed(_event: MouseEvent): void {
+        let xPos: number = _event.clientX;
+        let yPos: number = _event.clientY;
+
+        xPos -= 10;
+        yPos -= 75;
+
+        let n: number = 1 + Math.floor(Math.random() * 5);
+
+        for (let i: number = 0; i < n; i++) {
+            let rndm: number = Math.floor(Math.random() * foodColors.length);
+            let food: Foods = new Foods(xPos, yPos, foodColors[rndm]);
+            movingObjects.push(food);
+        }
     }
 
 }
