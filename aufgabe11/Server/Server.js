@@ -25,6 +25,7 @@ function handleRequest(_request, _response) {
                 playerscore: parseInt(query["score"])
             };
             Database.insert(player);
+            console.log("respond");
             respond(_response, "storing data");
             break;
         case "refresh":

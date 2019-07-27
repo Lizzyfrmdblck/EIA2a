@@ -34,6 +34,8 @@ function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerRes
             };
             Database.insert(player);
 
+            console.log("respond");
+
             respond(_response, "storing data");
             break;
         case "refresh":
