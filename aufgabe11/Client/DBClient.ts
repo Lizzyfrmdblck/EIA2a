@@ -6,16 +6,15 @@ namespace Abschlussaufgabe {
     function init(_event: Event): void {
         console.log("Init");
         let insertButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("send");
-        let refreshButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("refresh");
-        let startSearch: HTMLButtonElement = <HTMLButtonElement>document.getElementById("search");
+        
+        let startSearch: HTMLButtonElement = <HTMLButtonElement>document.getElementById("highscore");
         insertButton.addEventListener("click", insert);
-        refreshButton.addEventListener("click", refresh);
+
         startSearch.addEventListener("click", suche);
     }
 
 
     function insert(_event: Event): void {
-        let inputs: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input");
         let query: string = "command=insert";
         query += "&name=" + playername;
         

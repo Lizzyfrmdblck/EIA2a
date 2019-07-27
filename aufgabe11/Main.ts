@@ -59,6 +59,7 @@ namespace Abschlussaufgabe {
     function sendData(): void {
         let xhr: XMLHttpRequest = new XMLHttpRequest();
         xhr.open("GET", url, true);
+        console.log(query);
         xhr.addEventListener("readystatechange", handleStateChange);
         xhr.send();
     }

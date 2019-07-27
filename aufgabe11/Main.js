@@ -36,6 +36,7 @@ var Abschlussaufgabe;
     function sendData() {
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
+        console.log(Abschlussaufgabe.query);
         xhr.addEventListener("readystatechange", handleStateChange);
         xhr.send();
     }

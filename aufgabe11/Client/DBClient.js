@@ -6,14 +6,11 @@ var Abschlussaufgabe;
     function init(_event) {
         console.log("Init");
         let insertButton = document.getElementById("send");
-        let refreshButton = document.getElementById("refresh");
-        let startSearch = document.getElementById("search");
+        let startSearch = document.getElementById("highscore");
         insertButton.addEventListener("click", insert);
-        refreshButton.addEventListener("click", refresh);
         startSearch.addEventListener("click", suche);
     }
     function insert(_event) {
-        let inputs = document.getElementsByTagName("input");
         let query = "command=insert";
         query += "&name=" + Abschlussaufgabe.playername;
         query += "&score=" + Abschlussaufgabe.scoreNumber;
