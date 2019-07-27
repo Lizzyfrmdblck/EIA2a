@@ -2,10 +2,10 @@ var Abschlussaufgabe;
 (function (Abschlussaufgabe) {
     window.addEventListener("load", init);
     //let serverAddress: string = "http://localhost:8100/";
-    let serverAddress = "https://eia2-julian.herokuapp.com/";
+    let serverAddress = "https://eia2a-aufgabe6.herokuapp.com/";
     function init(_event) {
         console.log("Init");
-        let insertButton = document.getElementById("insert");
+        let insertButton = document.getElementById("send");
         let refreshButton = document.getElementById("refresh");
         let startSearch = document.getElementById("search");
         insertButton.addEventListener("click", insert);
@@ -15,7 +15,7 @@ var Abschlussaufgabe;
     function insert(_event) {
         let inputs = document.getElementsByTagName("input");
         let query = "command=insert";
-        query += "&name=" + inputs[0].value;
+        query += "&name=" + Abschlussaufgabe.playername;
         query += "&score=" + inputs[2].value;
         console.log(query);
         sendRequest(query, handleInsertResponse);

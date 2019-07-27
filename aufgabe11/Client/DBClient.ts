@@ -1,11 +1,11 @@
 namespace Abschlussaufgabe {
     window.addEventListener("load", init);
     //let serverAddress: string = "http://localhost:8100/";
-    let serverAddress: string = "https://eia2-julian.herokuapp.com/";
+    let serverAddress: string = "https://eia2a-aufgabe6.herokuapp.com/";
 
     function init(_event: Event): void {
         console.log("Init");
-        let insertButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("insert");
+        let insertButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("send");
         let refreshButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("refresh");
         let startSearch: HTMLButtonElement = <HTMLButtonElement>document.getElementById("search");
         insertButton.addEventListener("click", insert);
@@ -17,7 +17,8 @@ namespace Abschlussaufgabe {
     function insert(_event: Event): void {
         let inputs: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input");
         let query: string = "command=insert";
-        query += "&name=" + inputs[0].value;
+        query += "&name=" + playername;
+        
         query += "&score=" + inputs[2].value;
         console.log(query);
         sendRequest(query, handleInsertResponse);

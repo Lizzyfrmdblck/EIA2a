@@ -8,25 +8,21 @@ var Abschlussaufgabe;
     Abschlussaufgabe.down = false;
     Abschlussaufgabe.on = true;
     Abschlussaufgabe.query = "";
+    let url = "https://eia2a-aufgabe6.herokuapp.com/?";
     Abschlussaufgabe.scoreNumber = 0;
-    let score;
     window.addEventListener("keydown", checkKey);
     //Erfassen der HTMLElemente zum bearbeiten in TypeScript
-    let upButton;
-    let downButton;
     let start;
     let reload;
     let info;
-    let infoMobile;
     //Funktion zum Grundaufbau des Programms
     function init(_event) {
         let canvas = document.getElementsByTagName("canvas")[0];
         Abschlussaufgabe.ctx = canvas.getContext("2d");
-        score = document.getElementById("score");
-        score.innerText = "Score: 0";
         start = document.getElementById("start");
         reload = document.getElementById("reload");
         info = document.getElementById("info");
+        document.getElementById("send").addEventListener("click", sendData);
         reload.addEventListener("click", reloadClicked);
         canvas.width = 1400;
         canvas.height = 600;
@@ -36,6 +32,18 @@ var Abschlussaufgabe;
         Abschlussaufgabe.getImage = Abschlussaufgabe.ctx.getImageData(0, 0, 1400, 600);
         createRanFishes();
         setTimeout(animate, 100);
+    }
+    function sendData() {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
+    }
+    function handleStateChange(_event) {
+        let xhr = _event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            document.getElementById("submitÜbersicht").innerHTML = xhr.response;
+        }
     }
     //Seite neu laden nach Klicken auf Reload-Button nach Game Over
     function reloadClicked() {
@@ -78,14 +86,16 @@ var Abschlussaufgabe;
             Abschlussaufgabe.playerfish.y += 20;
         }
     }
-    function setupAsynchronForm() { }
+    //function setupAsynchronForm { }
     function touchFish() {
         //check ob GameFish x gleich wie RanFish x ist
         for (let i = 0; i < Abschlussaufgabe.ranfishes.length; i++) {
             if (Abschlussaufgabe.ranfishes[i].x < Abschlussaufgabe.playerfish.x + 70 && Abschlussaufgabe.ranfishes[i].x > Abschlussaufgabe.playerfish.x - 70 && Abschlussaufgabe.ranfishes[i].y > Abschlussaufgabe.playerfish.y - 70 && Abschlussaufgabe.ranfishes[i].y < Abschlussaufgabe.playerfish.y + 70 && Abschlussaufgabe.ranfishes[i].ranradius < Abschlussaufgabe.playerfish.playerradius) {
                 Abschlussaufgabe.playerfish.playerradius += 1;
                 Abschlussaufgabe.ranfishes.splice(i, 1);
-                //  ranfishes = new RanFishes();
+                Abschlussaufgabe.scoreNumber += 5;
+                let nf = new Abschlussaufgabe.RanFishes();
+                Abschlussaufgabe.ranfishes.push(nf);
             }
             else if (Abschlussaufgabe.ranfishes[i].x < Abschlussaufgabe.playerfish.x + 70 && Abschlussaufgabe.ranfishes[i].x > Abschlussaufgabe.playerfish.x - 70 && Abschlussaufgabe.ranfishes[i].y > Abschlussaufgabe.playerfish.y - 70 && Abschlussaufgabe.ranfishes[i].y < Abschlussaufgabe.playerfish.y + 70 && Abschlussaufgabe.ranfishes[i].ranradius > Abschlussaufgabe.playerfish.playerradius) {
                 //ranfishes[i].ranradius > playerfish.playerradius) 
@@ -135,8 +145,7 @@ var Abschlussaufgabe;
         Abschlussaufgabe.ctx.fillText("game over", 650, 180);
         reload.style.display = "block";
         Abschlussaufgabe.on = false;
-        let playername;
-        playername = prompt("Game Over. Trage deinen Namen in die Highscore Liste ein.");
+        Abschlussaufgabe.playername = prompt("Game Over. Trage deinen Namen in die Highscore Liste ein.");
     }
     Abschlussaufgabe.gameOver = gameOver;
 })(Abschlussaufgabe || (Abschlussaufgabe = {}));

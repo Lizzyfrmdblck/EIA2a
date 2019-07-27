@@ -11,20 +11,22 @@ namespace Abschlussaufgabe {
     export let down: boolean = false;
     export let on: boolean = true;
     export let query: string = "";
+    export let playername: string;
+
+    let url: string = "https://eia2a-aufgabe6.herokuapp.com/?";
+
 
 
     export let scoreNumber: number = 0;
-    let score: HTMLElement;
     window.addEventListener("keydown", checkKey);
 
     //Erfassen der HTMLElemente zum bearbeiten in TypeScript
 
-    let upButton: HTMLElement;
-    let downButton: HTMLElement;
+  
     let start: HTMLElement;
     let reload: HTMLElement;
     let info: HTMLElement;
-    let infoMobile: HTMLElement;
+  
 
 
     //Funktion zum Grundaufbau des Programms
@@ -32,13 +34,14 @@ namespace Abschlussaufgabe {
         let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
         ctx = canvas.getContext("2d");
 
-        score = document.getElementById("score");
-        score.innerText = "Score: 0";
 
         start = document.getElementById("start");
         reload = document.getElementById("reload");
         info = document.getElementById("info");
+        document.getElementById("send").addEventListener("click", sendData);
 
+        
+        
         reload.addEventListener("click", reloadClicked);
 
         canvas.width = 1400;
@@ -53,6 +56,21 @@ namespace Abschlussaufgabe {
 
     }
 
+    function sendData(): void {
+        let xhr: XMLHttpRequest = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
+    }
+   
+    function handleStateChange(_event: ProgressEvent): void {
+        let xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            document.getElementById("submitÜbersicht").innerHTML = xhr.response;
+        }
+    }
+
+    
     //Seite neu laden nach Klicken auf Reload-Button nach Game Over
     function reloadClicked(): void {
         location.reload();
@@ -102,14 +120,17 @@ namespace Abschlussaufgabe {
         }
     }
 
-    function setupAsynchronForm {}
+    //function setupAsynchronForm { }
     function touchFish(): void {
         //check ob GameFish x gleich wie RanFish x ist
         for (let i: number = 0; i < ranfishes.length; i++) {
             if (ranfishes[i].x < playerfish.x + 70 && ranfishes[i].x > playerfish.x - 70 && ranfishes[i].y > playerfish.y - 70 && ranfishes[i].y < playerfish.y + 70 && ranfishes[i].ranradius < playerfish.playerradius) {
                 playerfish.playerradius += 1;
                 ranfishes.splice(i, 1);
-                //  ranfishes = new RanFishes();
+                scoreNumber += 5;
+               
+                let nf: RanFishes = new RanFishes();
+                ranfishes.push(nf); 
             }
             else if (ranfishes[i].x < playerfish.x + 70 && ranfishes[i].x > playerfish.x - 70 && ranfishes[i].y > playerfish.y - 70 && ranfishes[i].y < playerfish.y + 70 && ranfishes[i].ranradius > playerfish.playerradius) {
                 //ranfishes[i].ranradius > playerfish.playerradius) 
@@ -171,7 +192,7 @@ namespace Abschlussaufgabe {
         ctx.fillText("game over", 650, 180);
         reload.style.display = "block";
         on = false;
-        let playername: string;
+        
         playername = prompt("Game Over. Trage deinen Namen in die Highscore Liste ein.");
 
 
