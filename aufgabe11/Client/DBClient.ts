@@ -19,7 +19,7 @@ namespace Abschlussaufgabe {
         let query: string = "command=insert";
         query += "&name=" + playername;
         
-        query += "&score=" + inputs[2].value;
+        query += "&score=" + scoreNumber;
         console.log(query);
         sendRequest(query, handleInsertResponse);
     }

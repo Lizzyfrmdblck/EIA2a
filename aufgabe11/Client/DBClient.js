@@ -16,7 +16,7 @@ var Abschlussaufgabe;
         let inputs = document.getElementsByTagName("input");
         let query = "command=insert";
         query += "&name=" + Abschlussaufgabe.playername;
-        query += "&score=" + inputs[2].value;
+        query += "&score=" + Abschlussaufgabe.scoreNumber;
         console.log(query);
         sendRequest(query, handleInsertResponse);
     }

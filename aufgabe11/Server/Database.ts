@@ -14,10 +14,10 @@ if (process.env.NODE_ENV == "production") {
 }
 
 // try to connect to database, then activate callback "handleConnect" 
-Mongo.MongoClient.connect(databaseURL, { connectTimeoutMS: 8000 }, handleConnect);
+Mongo.MongoClient.connect(databaseURL, handleConnect);
 
 // connect-handler receives two standard parameters, an error object and a database client object
-function handleConnect(_e: Mongo.MongoError, _client: Mongo.MongoClient): void {
+function handleConnect(_e: Mongo.MongoError, _client: Mongo.Db): void {
     if (_e)
         console.log("Unable to connect to database, error: ", _e);
     else {
@@ -27,7 +27,7 @@ function handleConnect(_e: Mongo.MongoError, _client: Mongo.MongoClient): void {
     }
 }
 
-export function insert(_doc: StudentData): void {
+export function insert(_doc: PlayerData): void {
     // try insertion then activate callback "handleInsert"
     score.insertOne(_doc, handleInsert);
 }
@@ -46,12 +46,12 @@ export function findAll(_callback: Function): void {
 
     // toArray-handler receives two standard parameters, an error object and the array
     // implemented as inner function, so _callback is in scope
-    function prepareAnswer(_e: Mongo.MongoError, studentArray: StudentData[]): void {
+    function prepareAnswer(_e: Mongo.MongoError, playerArray: PlayerData[]): void {
         if (_e)
             _callback("Error" + _e);
         else
             // stringify creates a json-string, passed it back to _callback
-            _callback(JSON.stringify(studentArray));
+            _callback(JSON.stringify(playerArray));
     }
 }
 
