@@ -3,15 +3,27 @@
 <head>
 <title>Seaworld🐟</title>
 <meta charset="utf-8" />
+<script src="background.js" type="text/javascript" charset="utf-8"></script>
+<script src="MovingObj/Bubbles.js" type="text/javascript" charset="utf-8"></script>
+<script src="MovingObj/RanFishes.js" type="text/javascript" charset="utf-8"></script>
+<script src="MovingObj/GameFish.js" type="text/javascript" charset="utf-8"></script>
+<script src="MovingObj/Food.js" type="text/javascript" charset="utf-8"></script>
 <script src="Main.js" type="text/javascript" charset="utf-8"></script>
-<script src="Bubbles.js" type="text/javascript" charset="utf-8"></script>
-<script src="Fishes.js" type="text/javascript" charset="utf-8"></script>
-<script src="Fishes2.js" type="text/javascript" charset="utf-8"></script>
+
+
 
 
 
  </head>
 <body>
-	<canvas width=414 height=736></canvas>
+	<!-- <canvas width=414 height=736></canvas> -->	
+	<canvas width="1400" height="600"></canvas>
+    <p id="info">Benutz die Pfeiltasten, um den Fisch zu bewegen</p>
+    <button id="reload">Reload</button>
+    <button id="highscore">Highscorelist</button>
+    <input id="name" type="text" placeholder="Dein Name">
+    <button id="send">Abschicken</button>
+
+	<div id="score"></div>
 </body>
 </html>

@@ -1,109 +1,143 @@
-var seaworld;
-(function (seaworld) {
-    window.addEventListener("load", init);
-    seaworld.fishes = [];
-    seaworld.fishes2 = [];
-    seaworld.bubbles = [];
-    let canvas = document.getElementsByTagName("canvas")[0];
+var Abschlussaufgabe;
+(function (Abschlussaufgabe) {
+    window.addEventListener("DOMContentLoaded", init);
+    Abschlussaufgabe.ranfishes = [];
+    Abschlussaufgabe.playerfish = new Abschlussaufgabe.GameFish();
+    Abschlussaufgabe.bubbles = [];
+    Abschlussaufgabe.up = false;
+    Abschlussaufgabe.down = false;
+    Abschlussaufgabe.on = true;
+    Abschlussaufgabe.query = "";
+    Abschlussaufgabe.scoreNumber = 0;
+    let score;
+    window.addEventListener("keydown", checkKey);
+    //Erfassen der HTMLElemente zum bearbeiten in TypeScript
+    let upButton;
+    let downButton;
+    let start;
+    let reload;
+    let info;
+    let infoMobile;
+    //Funktion zum Grundaufbau des Programms
     function init(_event) {
-        console.log("Canvas started");
         let canvas = document.getElementsByTagName("canvas")[0];
-        canvas.width = 414;
-        canvas.height = 748;
-        seaworld.ctx = canvas.getContext("2d");
-        drawBackground2();
+        Abschlussaufgabe.ctx = canvas.getContext("2d");
+        score = document.getElementById("score");
+        score.innerText = "Score: 0";
+        start = document.getElementById("start");
+        reload = document.getElementById("reload");
+        info = document.getElementById("info");
+        reload.addEventListener("click", reloadClicked);
+        canvas.width = 1400;
+        canvas.height = 600;
+        Abschlussaufgabe.drawBackground();
         createBubbles();
         //Hintergrund speichern
-        seaworld.getImage = seaworld.ctx.getImageData(0, 0, 414, 748);
-        createFishes();
+        Abschlussaufgabe.getImage = Abschlussaufgabe.ctx.getImageData(0, 0, 1400, 600);
+        createRanFishes();
         setTimeout(animate, 100);
     }
-    //Funktion kreiert 5 Fische
-    function createFishes() {
-        for (let i = 0; i < 5; i++) {
-            let fish = new seaworld.Fishes();
-            seaworld.fishes.push(fish);
-            console.log(seaworld.fishes);
-        }
+    //Seite neu laden nach Klicken auf Reload-Button nach Game Over
+    function reloadClicked() {
+        location.reload();
     }
-    //Funktion kreiert 5 Fische
-    function createFishes2() {
-        for (let i = 0; i < 5; i++) {
-            let fish = new seaworld.Fishes2();
-            seaworld.fishes2.push(fish);
-            console.log(seaworld.fishes2);
+    //Funktion kreiert 8 Fische
+    function createRanFishes() {
+        // playerfish = new GameFish();
+        for (let i = 0; i < 8; i++) {
+            let ranFishes = new Abschlussaufgabe.RanFishes();
+            Abschlussaufgabe.ranfishes.push(ranFishes);
+            //console.log(ranFishes);
         }
     }
     //Funktion kreiert 20 Luftblasen, pusht Bubbles in Array 
     function createBubbles() {
         for (let i = 0; i < 20; i++) {
-            let bubble = new seaworld.Bubbles();
-            seaworld.bubbles.push(bubble);
+            let bubble = new Abschlussaufgabe.Bubbles();
+            Abschlussaufgabe.bubbles.push(bubble);
         }
-        console.log(seaworld.bubbles);
+        //console.log(bubbles);
     }
+    //Bewegung des Fisches wird gesteuert
+    function checkKey(_event) {
+        _event.preventDefault();
+        // Linker Pfeil oder Taste A
+        if (_event.keyCode == 37 || _event.keyCode == 65) {
+            Abschlussaufgabe.playerfish.x -= 20;
+        }
+        // Pfeil hocch oder W
+        else if (_event.keyCode == 38 || _event.keyCode == 87) {
+            Abschlussaufgabe.playerfish.y -= 20;
+        }
+        // Pfeil rechts oder D
+        else if (_event.keyCode == 39 || _event.keyCode == 68) {
+            Abschlussaufgabe.playerfish.x += 20;
+        }
+        // Pfeil runter oder S
+        else if (_event.keyCode == 40 || _event.keyCode == 83) {
+            Abschlussaufgabe.playerfish.y += 20;
+        }
+    }
+    function setupAsynchronForm() { }
+    function touchFish() {
+        //check ob GameFish x gleich wie RanFish x ist
+        for (let i = 0; i < Abschlussaufgabe.ranfishes.length; i++) {
+            if (Abschlussaufgabe.ranfishes[i].x < Abschlussaufgabe.playerfish.x + 70 && Abschlussaufgabe.ranfishes[i].x > Abschlussaufgabe.playerfish.x - 70 && Abschlussaufgabe.ranfishes[i].y > Abschlussaufgabe.playerfish.y - 70 && Abschlussaufgabe.ranfishes[i].y < Abschlussaufgabe.playerfish.y + 70 && Abschlussaufgabe.ranfishes[i].ranradius < Abschlussaufgabe.playerfish.playerradius) {
+                Abschlussaufgabe.playerfish.playerradius += 1;
+                Abschlussaufgabe.ranfishes.splice(i, 1);
+                //  ranfishes = new RanFishes();
+            }
+            else if (Abschlussaufgabe.ranfishes[i].x < Abschlussaufgabe.playerfish.x + 70 && Abschlussaufgabe.ranfishes[i].x > Abschlussaufgabe.playerfish.x - 70 && Abschlussaufgabe.ranfishes[i].y > Abschlussaufgabe.playerfish.y - 70 && Abschlussaufgabe.ranfishes[i].y < Abschlussaufgabe.playerfish.y + 70 && Abschlussaufgabe.ranfishes[i].ranradius > Abschlussaufgabe.playerfish.playerradius) {
+                //ranfishes[i].ranradius > playerfish.playerradius) 
+                console.log("Hallo");
+                gameOver();
+            }
+        }
+    }
+    /* function touchBow(): void {
+ 
+         document.getElementById("score").innerHTML = "";
+ 
+         //checkt ob Playerfisch durch x = 1000 und y zw. 500 und 600 schwimmt
+         let r: number = 1000;
+             if (r =< playerfish.x + 100 && r =< playerfish.x - 100 && 500 => playerfish.y - 100 && 500 => playerfish.y + 100) {
+                 score.innerText += " " + 10;
+             
+             }
+ 
+ 
+         
+     } */
     function animate() {
-        setTimeout(animate, 100);
-        seaworld.ctx.putImageData(seaworld.getImage, 0, 0);
-        //        console.log(fishes.length);
-        for (let i = 0; i < seaworld.fishes.length; i++) {
-            seaworld.fishes[i].move();
-            seaworld.fishes[i].drawFish();
-        }
-        for (let i = 0; i < seaworld.bubbles.length; i++) {
-            seaworld.bubbles[i].moveBubble();
-            seaworld.bubbles[i].drawBubble();
-        }
-    }
-    //Wasser und Sand
-    function drawBackground2() {
-        let gradient;
-        seaworld.ctx.beginPath();
-        seaworld.ctx.moveTo(1, 1);
-        seaworld.ctx.lineTo(414, 1);
-        seaworld.ctx.lineTo(414, 734);
-        seaworld.ctx.lineTo(1, 734);
-        seaworld.ctx.lineTo(1, 1);
-        seaworld.ctx.closePath();
-        gradient = seaworld.ctx.createLinearGradient(207, 1, 207, 734);
-        gradient.addColorStop(0.00, "rgb(42, 170, 225)");
-        gradient.addColorStop(1.00, "rgb(16, 113, 185)");
-        seaworld.ctx.fillStyle = gradient;
-        seaworld.ctx.fill();
-        seaworld.ctx.lineWidth = 1.4;
-        seaworld.ctx.strokeStyle = "rgb(1, 1, 1)";
-        seaworld.ctx.stroke();
-        seaworld.ctx.beginPath();
-        seaworld.ctx.moveTo(2.2, 548.0);
-        seaworld.ctx.bezierCurveTo(2, 548, 219, 489, 413, 548);
-        seaworld.ctx.lineTo(413, 733);
-        seaworld.ctx.lineTo(2, 733);
-        seaworld.ctx.fillStyle = "rgb(229, 202, 144)";
-        seaworld.ctx.fill();
-        seaworld.ctx.restore();
-        for (let i = 0; i < 150; i++) {
-            let randX = (Math.random() * (400) + 0);
-            let randY = (Math.random() * (120) + 500);
-            //zeichnet Algen im vorgegebenen Raum
-            drawAlga(randX, randY, 10, 20, "#676765", "#676765");
+        if (Abschlussaufgabe.on == true) {
+            setTimeout(animate, 40);
+            Abschlussaufgabe.ctx.putImageData(Abschlussaufgabe.getImage, 0, 0);
+            Abschlussaufgabe.playerfish.update();
+            //        console.log(fishes.length);
+            for (let i = 0; i < Abschlussaufgabe.ranfishes.length; i++) {
+                Abschlussaufgabe.ranfishes[i].move();
+                Abschlussaufgabe.ranfishes[i].drawFish();
+            }
+            for (let i = 0; i < Abschlussaufgabe.bubbles.length; i++) {
+                Abschlussaufgabe.bubbles[i].moveBubble();
+                Abschlussaufgabe.bubbles[i].drawBubble();
+            }
+            touchFish();
+            //touchBow();
         }
     }
-    //Funktion Alge
-    function drawAlga(_x, _y, _w, _h, _fill1, _fill2) {
-        seaworld.ctx.save();
-        seaworld.ctx.beginPath();
-        seaworld.ctx.moveTo(_x + 2.5, _y + 1.0);
-        seaworld.ctx.lineTo(_x + 2.3, _y + 0.0);
-        seaworld.ctx.lineTo(_x + 2.0, _y + 1.0);
-        seaworld.ctx.lineTo(_x + 0.0, _y + 90.0);
-        seaworld.ctx.lineTo(_x + 3.5, _y + 90.0);
-        seaworld.ctx.lineTo(_x + 2.5, _y + 1.0);
-        seaworld.ctx.closePath();
-        seaworld.ctx.fillStyle = "rgb(59, 150, 10)";
-        seaworld.ctx.strokeStyle = "rgb(66, 244, 113)";
-        seaworld.ctx.stroke();
-        seaworld.ctx.fill("evenodd");
-        seaworld.ctx.restore();
+    //Canvas mit gameover-Meldung überschreiben und Reload-Button einblenden
+    function gameOver() {
+        Abschlussaufgabe.ctx.fillStyle = "#000000";
+        Abschlussaufgabe.ctx.fillRect(0, 0, Abschlussaufgabe.ctx.canvas.width, Abschlussaufgabe.ctx.canvas.height);
+        Abschlussaufgabe.ctx.font = "25px Arial";
+        Abschlussaufgabe.ctx.fillStyle = "#FFFFFF";
+        Abschlussaufgabe.ctx.fillText("game over", 650, 180);
+        reload.style.display = "block";
+        Abschlussaufgabe.on = false;
+        let playername;
+        playername = prompt("Game Over. Trage deinen Namen in die Highscore Liste ein.");
     }
-})(seaworld || (seaworld = {}));
+    Abschlussaufgabe.gameOver = gameOver;
+})(Abschlussaufgabe || (Abschlussaufgabe = {}));
 //# sourceMappingURL=Main.js.map

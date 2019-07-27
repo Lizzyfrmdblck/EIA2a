@@ -5,7 +5,7 @@
 	"author": "Jirka, adapted by Lukas",
 	"main": "Server.js",
 	"scripts": {
-		"start": "node aufgabe07/Server/server.js"
+		"start": "node aufgabe11/Server/Server.js"
 	},
 	"engines": {
 		"node": "8.11.3"
@@ -13,6 +13,7 @@
 	"dependencies": {
 		"@types/node": "^11.13.10",
 		"node": "^12.1.0",
-		"tslint": "^5.17.0"
+		"tslint": "^5.17.0",
+		"mongodb": "^3.3.0-beta2"
 	}
 }
