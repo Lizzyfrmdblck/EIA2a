@@ -9,7 +9,7 @@ let score: Mongo.Collection;
 // running on heroku?
 if (process.env.NODE_ENV == "production") {
     // databaseURL = "mongodb+srv://username:password@hostname:port/database";
-    databaseURL = "mongodb+srv://<player>:<player>@cluster0-om0ww.mongodb.net/test?retryWrites=true&w=majority";
+    databaseURL = "mongodb+srv://player:player@cluster0-om0ww.mongodb.net/test?retryWrites=true&w=majority";
     databaseName = "highscore";
 }
 
