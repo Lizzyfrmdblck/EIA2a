@@ -15,6 +15,8 @@ var Abschlussaufgabe;
     let start;
     let reload;
     let info;
+    let score;
+    score = document.getElementById("score");
     //Funktion zum Grundaufbau des Programms
     function init(_event) {
         let canvas = document.getElementsByTagName("canvas")[0];
@@ -23,6 +25,7 @@ var Abschlussaufgabe;
         reload = document.getElementById("reload");
         info = document.getElementById("info");
         document.getElementById("send").addEventListener("click", sendData);
+        //document.getElementById("highscore").addEventListener("click", getData);
         reload.addEventListener("click", reloadClicked);
         canvas.width = 1400;
         canvas.height = 600;
@@ -105,24 +108,19 @@ var Abschlussaufgabe;
             }
         }
     }
-    /* function touchBow(): void {
- 
-         document.getElementById("score").innerHTML = "";
- 
-         //checkt ob Playerfisch durch x = 1000 und y zw. 500 und 600 schwimmt
-         let r: number = 1000;
-             if (r =< playerfish.x + 100 && r =< playerfish.x - 100 && 500 => playerfish.y - 100 && 500 => playerfish.y + 100) {
-                 score.innerText += " " + 10;
-             
-             }
- 
- 
-         
-     } */
+    function touchBow() {
+        document.getElementById("score").innerHTML = "";
+        //checkt ob Playerfisch durch x = 1000 und y zw. 500 und 600 schwimmt 
+        if (Abschlussaufgabe.playerfish.x < 1050 && Abschlussaufgabe.playerfish.x > 1000 && Abschlussaufgabe.playerfish.y > 450 && Abschlussaufgabe.playerfish.y < 500)
+            Abschlussaufgabe.scoreNumber += 5;
+    }
     function animate() {
         if (Abschlussaufgabe.on == true) {
             setTimeout(animate, 40);
             Abschlussaufgabe.ctx.putImageData(Abschlussaufgabe.getImage, 0, 0);
+            Abschlussaufgabe.ctx.fillStyle = "white";
+            Abschlussaufgabe.ctx.font = "100px Arial";
+            Abschlussaufgabe.ctx.fillText(Abschlussaufgabe.scoreNumber.toString(), 200, 100);
             Abschlussaufgabe.playerfish.update();
             //        console.log(fishes.length);
             for (let i = 0; i < Abschlussaufgabe.ranfishes.length; i++) {
@@ -134,7 +132,7 @@ var Abschlussaufgabe;
                 Abschlussaufgabe.bubbles[i].drawBubble();
             }
             touchFish();
-            //touchBow();
+            touchBow();
         }
     }
     //Canvas mit gameover-Meldung überschreiben und Reload-Button einblenden
@@ -146,7 +144,7 @@ var Abschlussaufgabe;
         Abschlussaufgabe.ctx.fillText("game over", 650, 180);
         reload.style.display = "block";
         Abschlussaufgabe.on = false;
-        Abschlussaufgabe.playername = prompt("Game Over. Trage deinen Namen in die Highscore Liste ein.");
+        Abschlussaufgabe.playername = prompt("Game Over. Trage deinen Namen in die Highscore Liste ein und drück auf Abschicken.");
     }
     Abschlussaufgabe.gameOver = gameOver;
 })(Abschlussaufgabe || (Abschlussaufgabe = {}));

@@ -26,6 +26,10 @@ namespace Abschlussaufgabe {
     let start: HTMLElement;
     let reload: HTMLElement;
     let info: HTMLElement;
+    let score: HTMLElement;
+
+    score = <HTMLElement>document.getElementById("score");
+
   
 
 
@@ -38,7 +42,10 @@ namespace Abschlussaufgabe {
         start = document.getElementById("start");
         reload = document.getElementById("reload");
         info = document.getElementById("info");
+
         document.getElementById("send").addEventListener("click", sendData);
+        //document.getElementById("highscore").addEventListener("click", getData);
+
 
         
         
@@ -143,27 +150,30 @@ namespace Abschlussaufgabe {
         }
     }
 
-    /* function touchBow(): void {
+    function touchBow(): void {
  
          document.getElementById("score").innerHTML = "";
  
          //checkt ob Playerfisch durch x = 1000 und y zw. 500 und 600 schwimmt 
-         let r: number = 1000;
-             if (r =< playerfish.x + 100 && r =< playerfish.x - 100 && 500 => playerfish.y - 100 && 500 => playerfish.y + 100) {
-                 score.innerText += " " + 10;
-             
-             }
- 
- 
-         
-     } */
+           
+             if (playerfish.x < 1050 && playerfish.x > 1000 && playerfish.y > 450 && playerfish.y < 500)
+             scoreNumber += 5;
+  
+     } 
 
 
 
     function animate(): void {
+        
+
         if (on == true) {
+
             setTimeout(animate, 40);
             ctx.putImageData(getImage, 0, 0);
+            ctx.fillStyle = "white";
+            ctx.font = "100px Arial";
+            ctx.fillText(scoreNumber.toString(), 200, 100);
+
             playerfish.update();
 
             //        console.log(fishes.length);
@@ -177,7 +187,8 @@ namespace Abschlussaufgabe {
 
             }
             touchFish();
-            //touchBow();
+            touchBow();
+            
         }
     }
 
@@ -194,7 +205,7 @@ namespace Abschlussaufgabe {
         reload.style.display = "block";
         on = false;
         
-        playername = prompt("Game Over. Trage deinen Namen in die Highscore Liste ein.");
+        playername = prompt("Game Over. Trage deinen Namen in die Highscore Liste ein und drück auf Abschicken.");
 
 
 
