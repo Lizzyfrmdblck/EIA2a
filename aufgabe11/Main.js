@@ -29,6 +29,7 @@ var Abschlussaufgabe;
         reload.addEventListener("click", reloadClicked);
         canvas.width = 1400;
         canvas.height = 600;
+        Abschlussaufgabe.timeout = 0;
         Abschlussaufgabe.drawBackground();
         createBubbles();
         //Hintergrund speichern
@@ -94,7 +95,11 @@ var Abschlussaufgabe;
     function touchFish() {
         //check ob GameFish x gleich wie RanFish x ist
         for (let i = 0; i < Abschlussaufgabe.ranfishes.length; i++) {
-            if (Abschlussaufgabe.ranfishes[i].x < Abschlussaufgabe.playerfish.x + 70 && Abschlussaufgabe.ranfishes[i].x > Abschlussaufgabe.playerfish.x - 70 && Abschlussaufgabe.ranfishes[i].y > Abschlussaufgabe.playerfish.y - 70 && Abschlussaufgabe.ranfishes[i].y < Abschlussaufgabe.playerfish.y + 70 && Abschlussaufgabe.ranfishes[i].ranradius < Abschlussaufgabe.playerfish.playerradius) {
+            if (Abschlussaufgabe.ranfishes[i].x < Abschlussaufgabe.playerfish.x + 70
+                && Abschlussaufgabe.ranfishes[i].x > Abschlussaufgabe.playerfish.x - 70
+                && Abschlussaufgabe.ranfishes[i].y > Abschlussaufgabe.playerfish.y - 70
+                && Abschlussaufgabe.ranfishes[i].y < Abschlussaufgabe.playerfish.y + 70
+                && Abschlussaufgabe.ranfishes[i].ranradius < Abschlussaufgabe.playerfish.playerradius) {
                 Abschlussaufgabe.playerfish.playerradius += 1;
                 Abschlussaufgabe.ranfishes.splice(i, 1);
                 Abschlussaufgabe.scoreNumber += 5;
@@ -110,7 +115,6 @@ var Abschlussaufgabe;
     }
     function touchBow() {
         document.getElementById("score").innerHTML = "";
-        //checkt ob Playerfisch durch x = 1000 und y zw. 500 und 600 schwimmt 
         if (Abschlussaufgabe.playerfish.x < 1050 && Abschlussaufgabe.playerfish.x > 1000 && Abschlussaufgabe.playerfish.y > 450 && Abschlussaufgabe.playerfish.y < 500)
             Abschlussaufgabe.scoreNumber += 5;
     }

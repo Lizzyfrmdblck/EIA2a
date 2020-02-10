@@ -1,5 +1,5 @@
 import * as Mongo from "mongodb";
-console.log("Database starting");
+console.log("Database connecting");
 
 let databaseURL: string = "mongodb://localhost:27017";
 let databaseName: string = "test";
@@ -9,8 +9,9 @@ let score: Mongo.Collection;
 // running on heroku?
 if (process.env.NODE_ENV == "production") {
     // databaseURL = "mongodb+srv://username:password@hostname:port/database";
-    databaseURL = "mongodb+srv://player:player@cluster0-om0ww.mongodb.net/test?retryWrites=true&w=majority";
-    databaseName = "highscore";
+    //databaseURL = "mongodb+srv://player:player@cluster0-om0ww.mongodb.net/test?retryWrites=true&w=majority";
+    databaseURL = "mongodb+srv://player:Lizzy@vogelhaus-f9agi.mongodb.net/test?retryWrites=true&w=majority";
+    databaseName = "vogelhaus";
 }
 
 // try to connect to database, then activate callback "handleConnect" 

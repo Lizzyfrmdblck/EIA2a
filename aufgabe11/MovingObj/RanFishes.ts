@@ -59,10 +59,6 @@ namespace Abschlussaufgabe {
             ctx.fill(fishEyeIris);
 
             
-
-
-
-
         }
 
         randomColor(): string {
@@ -80,7 +76,6 @@ namespace Abschlussaufgabe {
                 this.x = -40;
                 this.y = Math.random() * 670 + 10;
             }
-
 
             this.drawFish();
 

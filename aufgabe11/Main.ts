@@ -1,4 +1,4 @@
-namespace Abschlussaufgabe {
+namespace Abschlussaufgabe { //test
 
     window.addEventListener("DOMContentLoaded", init);
     export let ctx: CanvasRenderingContext2D;
@@ -6,6 +6,7 @@ namespace Abschlussaufgabe {
     export let playerfish: GameFish = new GameFish();
     export let bubbles: Bubbles[] = [];
     export let getImage: ImageData;
+    export let timeout: number;
 
     export let up: boolean = false;
     export let down: boolean = false;
@@ -46,13 +47,12 @@ namespace Abschlussaufgabe {
         document.getElementById("send").addEventListener("click", sendData);
         //document.getElementById("highscore").addEventListener("click", getData);
 
-
-        
         
         reload.addEventListener("click", reloadClicked);
 
         canvas.width = 1400;
         canvas.height = 600;
+        timeout = 0;
 
         drawBackground();
         createBubbles();
@@ -132,7 +132,11 @@ namespace Abschlussaufgabe {
     function touchFish(): void {
         //check ob GameFish x gleich wie RanFish x ist
         for (let i: number = 0; i < ranfishes.length; i++) {
-            if (ranfishes[i].x < playerfish.x + 70 && ranfishes[i].x > playerfish.x - 70 && ranfishes[i].y > playerfish.y - 70 && ranfishes[i].y < playerfish.y + 70 && ranfishes[i].ranradius < playerfish.playerradius) {
+            if (ranfishes[i].x < playerfish.x + 70 
+                && ranfishes[i].x > playerfish.x - 70 
+                && ranfishes[i].y > playerfish.y - 70 
+                && ranfishes[i].y < playerfish.y + 70 
+                && ranfishes[i].ranradius < playerfish.playerradius) {
                 playerfish.playerradius += 1;
                 ranfishes.splice(i, 1);
                 scoreNumber += 5;
@@ -154,9 +158,8 @@ namespace Abschlussaufgabe {
  
          document.getElementById("score").innerHTML = "";
  
-         //checkt ob Playerfisch durch x = 1000 und y zw. 500 und 600 schwimmt 
-           
-             if (playerfish.x < 1050 && playerfish.x > 1000 && playerfish.y > 450 && playerfish.y < 500)
+        
+         if (playerfish.x < 1050 && playerfish.x > 1000 && playerfish.y > 450 && playerfish.y < 500)
              scoreNumber += 5;
   
      } 
