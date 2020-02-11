@@ -51,15 +51,14 @@ namespace Birdsnest {
             let output: HTMLSpanElement = document.getElementById("spanElement");
             
             
-            output.textContent =  "";
+            output.textContent =  ""; //Zu Beginn leer
 
-            let playerDataArray: PlayerData[] = JSON.parse(xhr.response);
+            let playerDataArray: PlayerData[] = JSON.parse(xhr.response); //Antwort vom Server wird geparst
 
             for (let i: number = 0; i < playerDataArray.length; i++) {
 
 
-
-                let line: string = playerDataArray[i].name + " hat eine score von " + playerDataArray[i].playerscore;
+                let line: string = playerDataArray[i].name + " hat eine score von " + playerDataArray[i].playerscore + "." + "\n"; 
 
                 console.log(line);
                 output.textContent += line + "\n";

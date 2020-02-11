@@ -38,10 +38,10 @@ var Birdsnest;
         let xhr = _event.target;
         if (xhr.readyState == XMLHttpRequest.DONE) {
             let output = document.getElementById("spanElement");
-            output.textContent = "";
-            let playerDataArray = JSON.parse(xhr.response);
+            output.textContent = ""; //Zu Beginn leer
+            let playerDataArray = JSON.parse(xhr.response); //Antwort vom Server wird geparst
             for (let i = 0; i < playerDataArray.length; i++) {
-                let line = playerDataArray[i].name + " hat eine score von " + playerDataArray[i].playerscore;
+                let line = playerDataArray[i].name + " hat eine score von " + playerDataArray[i].playerscore + "." + "\n";
                 console.log(line);
                 output.textContent += line + "\n";
             }
