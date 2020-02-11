@@ -1,14 +1,12 @@
 var Birdsnest;
 (function (Birdsnest) {
     class Flake {
-        //Endlich kompiliert!
         constructor() {
             this.fillColor = "rgba(255,255,255,0.7)";
             this.strokeColor = "#FFFFFF";
             this.x = (Math.random() * 800);
             this.y = (Math.random() * 600);
             this.dy = ((-2) + Math.random() * (-5));
-            this.test = 0;
         }
         drawFlake() {
             Birdsnest.ctx.strokeStyle = "#FFFFFF";

@@ -14,7 +14,7 @@ var Birdsnest;
     let info;
     let score;
     score = document.getElementById("score");
-    //Funktion zum Grundaufbau des Programms
+    //Grundaufbau 
     function init(_event) {
         let canvas = document.getElementsByTagName("canvas")[0];
         Birdsnest.ctx = canvas.getContext("2d");
@@ -85,7 +85,7 @@ var Birdsnest;
         Birdsnest.ctx.fillText("GAME OVER - Maybe next time", 650, 180);
         reload.style.display = "block";
         Birdsnest.playername = prompt("Die Zeit ist vorbei. Gib deinen Namen an um ihn in der Bestenliste zu speichern.");
-        if (Birdsnest.playername != "") {
+        if (Birdsnest.playername != null || Birdsnest.playername != "") {
             Birdsnest.insert(Birdsnest.playername, scoreNumber);
         }
     }
@@ -94,7 +94,7 @@ var Birdsnest;
         Birdsnest.ctx.putImageData(Birdsnest.getImage, 0, 0);
         Birdsnest.ctx.fillText("Dein Score: " + scoreNumber.toString(), 20, 30);
         Birdsnest.ctx.fillText("Futter: " + Birdsnest.foodNumber.toString(), 100, 30);
-        if (Birdsnest.gametime < 500) {
+        if (Birdsnest.gametime < 2000) {
             for (let i = 0; i < Birdsnest.foodballs.length; i++) {
                 Birdsnest.foodballs[i].drawBall();
                 if (Birdsnest.foodballs[i].x < 320 && Birdsnest.foodballs[i].y < 455) {

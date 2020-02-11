@@ -48,20 +48,31 @@ namespace Birdsnest {
     export function handleFindResponse(_event: ProgressEvent): void { 
         let xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
-            let output: HTMLSpanElement = document.getElementById("spanElement");
+            let output: HTMLElement = document.getElementById("spanElement");
+            output.textContent = "";
+
             
             
-            output.textContent =  ""; //Zu Beginn leer
+            
+            //output.textContent =  ""; //Zu Beginn leer
 
             let playerDataArray: PlayerData[] = JSON.parse(xhr.response); //Antwort vom Server wird geparst
 
+            
+            playerDataArray.sort((a, b) => b.playerscore - a.playerscore);
+
             for (let i: number = 0; i < playerDataArray.length; i++) {
+                //Nur 10 High score elemente anzeigen, dann schleife beenden
+                if (i > 10)
+                    break;
 
 
-                let line: string = playerDataArray[i].name + " hat eine score von " + playerDataArray[i].playerscore + "." + "\n"; 
-
+                
+                let line: string = "Name: " + playerDataArray[i].name + " Score: " + playerDataArray[i].playerscore; 
+                output.appendChild(document.createTextNode(line));
+                output.appendChild(document.createElement("br"));
                 console.log(line);
-                output.textContent += line + "\n";
+                //outputsda.textContent += line + "\n";
              }
             
 

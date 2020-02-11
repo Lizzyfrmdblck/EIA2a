@@ -10,7 +10,7 @@ namespace Birdsnest {
         strokeColor: string;
         size: number; 
         radius: number;
-        scoreNumber: number;
+        addedScoreNumber: number;
 
 
     constructor(x: number, y: number) {
@@ -23,7 +23,7 @@ namespace Birdsnest {
             this.size = this.radius * 2; 
             this.radius = 50;
             this.factor = 0.9;
-            this.scoreNumber = 0;
+            this.addedScoreNumber = 0;
     
     }
 
@@ -56,7 +56,8 @@ namespace Birdsnest {
         }
 
         
-        eliminateBird(ranbirds: Bird[]): number {     
+        eliminateBird(ranbirds: Bird[]): number {  
+            this.addedScoreNumber = 0;   
             for (let i: number = 0; i < ranbirds.length; i++) {                         
                 if (   ranbirds[i].x < this.x + 20 
                     && ranbirds[i].x > this.x - 20 
@@ -64,17 +65,16 @@ namespace Birdsnest {
                     && ranbirds[i].y < this.y + 20 
                     && ranbirds[i].radius < this.radius) {
 
-                        //this.scoreNumber = ranbirds[i].dx;   
+                this.addedScoreNumber += ranbirds[i].dx;   
 
                 console.log("Eliminatebirds");
                 //snowballs.splice(i, 1);
-
                 ranbirds.splice(i, 1);
                 } else {
-                    this.scoreNumber = 0;
+                    //this.addedScoreNumber = 0;
                 }
             }
-            return this.scoreNumber;
+            return this.addedScoreNumber;
         }
 
         eliminateEagle(eagle: Eagle): number {     
@@ -87,13 +87,13 @@ namespace Birdsnest {
     
                                
                 console.log("Eliminateeagles");
-                this.scoreNumber = 100;
+                this.addedScoreNumber = 200;
                 eagle = null;
 
                 } else {
-                    this.scoreNumber = 0;
+                    this.addedScoreNumber = 0;
                 }
-                return this.scoreNumber;
+                return this.addedScoreNumber;
 
             
         }

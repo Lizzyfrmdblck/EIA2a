@@ -38,12 +38,19 @@ var Birdsnest;
         let xhr = _event.target;
         if (xhr.readyState == XMLHttpRequest.DONE) {
             let output = document.getElementById("spanElement");
-            output.textContent = ""; //Zu Beginn leer
+            output.textContent = "";
+            //output.textContent =  ""; //Zu Beginn leer
             let playerDataArray = JSON.parse(xhr.response); //Antwort vom Server wird geparst
+            playerDataArray.sort((a, b) => b.playerscore - a.playerscore);
             for (let i = 0; i < playerDataArray.length; i++) {
-                let line = playerDataArray[i].name + " hat eine score von " + playerDataArray[i].playerscore + "." + "\n";
+                //Nur 10 High score elemente anzeigen, dann schleife beenden
+                if (i > 10)
+                    break;
+                let line = "Name: " + playerDataArray[i].name + " Score: " + playerDataArray[i].playerscore;
+                output.appendChild(document.createTextNode(line));
+                output.appendChild(document.createElement("br"));
                 console.log(line);
-                output.textContent += line + "\n";
+                //outputsda.textContent += line + "\n";
             }
         }
     }

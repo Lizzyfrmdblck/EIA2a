@@ -10,8 +10,8 @@ namespace Birdsnest {
             this.strokeColor = "black";
             this.radius = 20;      
             this.y = -100;
-            this.dx = 1; 
-            this.dy = 15;
+            this.dx = 4; 
+            this.dy = 12;
             this.draw();
             this.movedown();
             this.moveright();

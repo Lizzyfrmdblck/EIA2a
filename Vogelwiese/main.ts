@@ -13,8 +13,8 @@ namespace Birdsnest {
     export let snowballs: SnowBall[] = [];
     export let foodballs: FoodBall[] = [];
     export let eagle: Eagle;
-   
-   
+
+    
     let scoreNumber: number;
     
     export let getImage: ImageData;
@@ -23,7 +23,6 @@ namespace Birdsnest {
     export let gametime: number = 0;
     export let mousex: number;
     export let mousey: number;
-    export let onefood: number;
 
     let start: HTMLElement;
     let reload: HTMLElement;
@@ -31,16 +30,10 @@ namespace Birdsnest {
     let score: HTMLElement;
 
 
-    
-    
-
     score = <HTMLElement>document.getElementById("score");
 
-   
 
-
-
-    //Funktion zum Grundaufbau des Programms
+    //Grundaufbau 
     function init(_event: Event): void {
         let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
         ctx = canvas.getContext("2d");
@@ -139,7 +132,7 @@ namespace Birdsnest {
         
         playername = prompt("Die Zeit ist vorbei. Gib deinen Namen an um ihn in der Bestenliste zu speichern.");
 
-        if(playername != "") {
+        if (playername != null || playername != "") {
             insert(playername, scoreNumber);
         }
 
@@ -152,7 +145,7 @@ namespace Birdsnest {
         ctx.fillText("Dein Score: " + scoreNumber.toString(), 20, 30);
         ctx.fillText("Futter: " + foodNumber.toString(), 100, 30);
 
-        if (gametime < 500) {
+        if (gametime < 2000) {
             for (let i: number = 0; i < foodballs.length; i++) {
                 foodballs[i].drawBall();
                 if (foodballs[i].x < 320 && foodballs[i].y < 455) {
@@ -171,11 +164,8 @@ namespace Birdsnest {
             }
 
             if (eagle != null) {
-                eagle.flyEagle();
-                
+                eagle.flyEagle();  
             }
-           
-            
             for (let i: number = 0; i < ranbirds.length; i++) {
                 
                 if (foodballs.length == 0) {
@@ -183,15 +173,14 @@ namespace Birdsnest {
                 }
                 if (foodballs.length > 0) {
                     ranbirds[i].checkDistance(foodballs[foodballs.length - 1]);
-                 }
-                
+                 }       
                 ranbirds[i].draw();
             }
-            
+
             for (let i: number = 0; i < flakes.length; i++) {
                 flakes[i].moveFlake();
             }
-
+            
             for (let i: number = 0; i < snowballs.length; i++) {
                 if (snowballs[i].y > ctx.canvas.height) {
                     snowballs.splice(i, 1);
@@ -206,8 +195,7 @@ namespace Birdsnest {
                     }
                 }
             }
-            
-            
+                  
             setTimeout(animate, 20);
             gametime ++;
 
