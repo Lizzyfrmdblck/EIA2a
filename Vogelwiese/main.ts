@@ -139,7 +139,7 @@ namespace Birdsnest {
         
         playername = prompt("Die Zeit ist vorbei. Gib deinen Namen an um ihn in der Bestenliste zu speichern.");
 
-        if(playername != ""){
+        if(playername != "") {
             insert(playername, scoreNumber);
         }
 

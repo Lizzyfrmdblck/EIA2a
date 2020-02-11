@@ -37,10 +37,14 @@ var Birdsnest;
     function handleFindResponse(_event) {
         let xhr = _event.target;
         if (xhr.readyState == XMLHttpRequest.DONE) {
-            let output = document.getElementById("info");
-            output.value = xhr.response;
-            let responseAsJson = JSON.parse(xhr.response);
-            console.log(responseAsJson);
+            let output = document.getElementById("spanElement");
+            output.textContent = "";
+            let playerDataArray = JSON.parse(xhr.response);
+            for (let i = 0; i < playerDataArray.length; i++) {
+                let line = playerDataArray[i].name + " hat eine score von " + playerDataArray[i].playerscore;
+                console.log(line);
+                output.textContent += line + "\n";
+            }
         }
     }
     Birdsnest.handleFindResponse = handleFindResponse;

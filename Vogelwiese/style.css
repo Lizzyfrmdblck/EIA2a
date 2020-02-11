@@ -6,7 +6,13 @@ left: 850px;
 width: 350px;
 }
 
+#spanElement {
+  word-wrap: break-word; 
+  word-break: break-all;
+  color: white;
 
+
+}
 
 body {
     font-family: 'Roboto', cursive;

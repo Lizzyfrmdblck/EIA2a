@@ -40,13 +40,32 @@ namespace Birdsnest {
         }
     }
 
+    interface PlayerData {
+        name: string;
+        playerscore: number;
+    }
+
     export function handleFindResponse(_event: ProgressEvent): void { 
         let xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
-            let output: HTMLTextAreaElement = document.getElementById("info");
-            output.value = xhr.response;
-            let responseAsJson: JSON = JSON.parse(xhr.response);
-            console.log(responseAsJson);
+            let output: HTMLSpanElement = document.getElementById("spanElement");
+            
+            
+            output.textContent =  "";
+
+            let playerDataArray: PlayerData[] = JSON.parse(xhr.response);
+
+            for (let i: number = 0; i < playerDataArray.length; i++) {
+
+
+
+                let line: string = playerDataArray[i].name + " hat eine score von " + playerDataArray[i].playerscore;
+
+                console.log(line);
+                output.textContent += line + "\n";
+             }
+            
+
         }
     }
 }

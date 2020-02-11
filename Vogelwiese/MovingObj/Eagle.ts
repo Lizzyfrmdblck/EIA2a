@@ -61,6 +61,9 @@ namespace Birdsnest {
         ctx.fillStyle = "black";
         ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
         ctx.arc(this.x, this.y, 5., 4, 1 * Math.PI);
+       
+        
+
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
